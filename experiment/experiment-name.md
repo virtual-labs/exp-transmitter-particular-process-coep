@@ -1,1 +1,1 @@
-## Configure a Transmitter for a particular process application
+Configure a Transmitter for a particular process application
