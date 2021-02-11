@@ -1,4 +1,3 @@
-## Procedure
 ## Instructions to run the simulator
 
 **Simulator contains 6 steps**
