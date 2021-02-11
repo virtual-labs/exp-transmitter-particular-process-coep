@@ -1,1 +1,1 @@
-## Understand effect of various configurable parameters on performance of transmitter
+Understand effect of various configurable parameters on performance of transmitter
