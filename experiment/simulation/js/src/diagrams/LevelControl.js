@@ -24,7 +24,7 @@ var width = $(window).width();
 	//y = 160;
 	
 	x = 40;
-	y = 180;
+	y = 120;
 
 	
 	

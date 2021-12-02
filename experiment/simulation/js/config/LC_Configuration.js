@@ -11,6 +11,7 @@ LC_ConfigureLT = function(appId){
 		configure +='<div id = "configDiv" class="container-fluid">'
 				+'<h4 align="center">LT Configuration</h4>'
 				+'<h6>In this level configure the LT 100</h6>'
+				//+'<div id="Reqtimer" class="col-md-12 col-sm-12"><i><label id="minutes">00</label><span>:</span><label id="seconds">00</label></i></div>'
 				+'<div class="row topmargin">'
 				+'<div class="col-sm-3 col-md-3 col-xl-3">'
 				+'<label>Select Type:</label>'
@@ -108,6 +109,9 @@ LC_ConfigureLT = function(appId){
 		
 			
 			$("#TestDiv").html(configure);
+			
+			stop_timer();
+			set_timer();
 		
 		//animLT.repeat(0);
 		LTCircle.attr({'fill':'green'});	
@@ -162,26 +166,35 @@ LC_ConfigureLT = function(appId){
 					if(calrange == range.toFixed(2) || calrange == range.toFixed(1)){
 						if((selectedType == "twowire" && output == "0")|| (selectedType == "threewire" && output == "0")|| (selectedType == "fourwire" && output == "0")){
 							
-						   alertify.alert("Configuration is successful. Please click next level to do Electrical Wiring Connections of transmitter");
+						   alertify.alert('Success!!',"Configuration is successful. Please click next level to proceed for  wiring of transmitter");
+						   $(".ajs-header").css("background-color","#4CAF50");
 						   $("#LC_LTwiringDiagram").prop("hidden", false);
 						   $("#trsmtrType, #LC_spanLevel, #LC_Range, #output").prop("disabled", true);				   
 							
 						}else if(selectedType == "hart" && output == "1"){
 							
-							alertify.alert("Configuration is successful.  Please click next level to do Electrical Wiring Connections of transmitter");
-						   $("#LC_LTwiringDiagram").prop("hidden", false);
+							alertify.alert('Success!!',"Configuration is successful. Please click next level to proceed for  wiring of transmitter");
+							 $(".ajs-header").css("background-color","#4CAF50");
+							$("#LC_LTwiringDiagram").prop("hidden", false);
 						   $("#trsmtrType, #LC_spanLevel, #LC_Range, #output").prop("disabled", true);
 						   
 						}else if(selectedType == "fftrans" && output == "2"){
 							
-							alertify.alert("Configuration is successful.  Please click next level to do Electrical Wiring Connections of transmitter");
-						   $("#LC_LTwiringDiagram").prop("hidden", false);
+							alertify.alert('Success!!',"Configuration is successful. Please click next level to proceed for  wiring of transmitter");
+							 $(".ajs-header").css("background-color","#4CAF50");
+							$("#LC_LTwiringDiagram").prop("hidden", false);
 						   $("#trsmtrType, #LC_spanLevel, #LC_Range, #output").prop("disabled", true);
 						   
 						}else{
 							
-							alertify.alert("Please Select The Correct Output As Per Selected Transmitter Type");
+							alertify.alert("Alert","Please Select The Correct Output As Per Selected Transmitter Type");
+							$(".ajs-header").css("background-color","#ce6058");
 						}
+						
+						
+						minutes = document.getElementById("minutes").textContent;
+		        		seconds = document.getElementById("seconds").textContent;        		
+//		        		console.log(minutes+":"+seconds);
 						
 						LC_configData.appId = appId;
 						LC_configData.trsmtrTpye = selectedType;
@@ -191,6 +204,10 @@ LC_ConfigureLT = function(appId){
 						LC_configData.configcnt = LC_ConfigFlagCnt;
 						LC_configData.lowerSpanLevel= lowerSpanLevel;
 						LC_configData.higherSpanLevel= higherSpanLevel;
+						LC_configData.configTimeInMin = minutes;
+						LC_configData.configTimeInSec = seconds;
+						
+						
 					//	console.log(LC_configData);
 						LC_appData.lcConfigData = LC_configData;
 					//	console.log(LC_appData);
@@ -199,16 +216,19 @@ LC_ConfigureLT = function(appId){
 						
 						$("#errRange" ).css("display","none");
 						
+						stop_timer();
+						
 					}else{
 						
 						if(LC_ConfigFlagCnt == 3){
 							
 							$("#errRange" ).css("display","none");
-							alertify.alert("Range is incorrect\nCorrect Range is: " +range.toFixed(2));						
+							alertify.alert("Alert","Range is incorrect\nCorrect Range is: " +range.toFixed(2));						
 						}else{
 							
 							$("#errRange" ).css("display","none");
-							alertify.alert("Range is incorrect");
+							alertify.alert("Alert","Range is incorrect");
+							$(".ajs-header").css("background-color","#ce6058");
 							LC_ConfigFlagCnt++;
 						}
 		
@@ -221,8 +241,9 @@ LC_ConfigureLT = function(appId){
 						}	
 					}else{
 						
-						alertify.alert("Please Select All The Fields");
-						
+						alertify.alert("Alert","Please Select All The Fields");
+						$(".ajs-header").css("background-color","#ce6058");
+
 					}
 					
 		 });

@@ -24,7 +24,7 @@ var width = $(window).width();
 	//y = 160;
 	
 	x = 390;
-	y = 290;
+	y = 190;
 
 	
 	var PL_tank = PL_Tank ((x-80), y);

@@ -27,7 +27,7 @@ var width = $(window).width();
 	
 
 	x = 40;
-	y = 180;
+	y = 120;
 
 	LC_lowlevel = lowerSpanLevel;
 	LC_highlevel = higherSpanLevel;

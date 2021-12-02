@@ -14,17 +14,23 @@ $(function () {
 		var SymbolLibrary = '';
 		
 		SymbolLibrary+='<div class="container-fluid" id="connectionLevel">'
-		       
+			//+'<div id="Reqtimer" class="col-md-12 col-sm-12"><i><label id="minutes">00</label><span>:</span><label id="seconds">00</label></i></div>'
 			    +'<div class="col-md-3 col-sm-3" id = "library">'
-				+'<div >'
+				
 				+'<h4 align = "center">Library</h4>'
 				// Common Symbols
+				+'<div id="commanSymbols" >'
+				+'<p>Common Symbols</p>'
 				+'<div data-shape="pwrSply" class="palette_node_element draw2d_droppable" title="Power Supply"><img src="images/img/powersupply.jpg"></div>'
 				+'<div data-shape="signal" class="palette_node_element draw2d_droppable" title="Analog IN"><img src="images/img/analog_in.jpg"></div>'
 				+'<div data-shape="analogOut" class="palette_node_element draw2d_droppable" title="Analog OUT"><img src="images/img/AnalogOut.png" ></div>'
 				+'<div data-shape="configurator" class="palette_node_element draw2d_droppable" title="Configurator"><img src="images/img/configurator.png "></div>'
 				+'<div data-shape="fftCard" class="palette_node_element draw2d_droppable" title="FFT Card"><img src="images/img/FFTCard250.png "></div>'
+				+'<div style="clear: left;"></div>'
+				+'</div>'
 				
+				+'<div id="TransmitterSymbols">'
+				+'<p>Transmitter Symbols</p>'
 				// LT Symbols
 				+'<div data-shape="LT_twoWireTrsmtr" class="palette_node_element draw2d_droppable" title="LT 100 2-Wire Transmitter"><img src="images/img/2-wireLT.jpg "></div>'
 				+'<div data-shape="LT_threeWireTrsmtr" class="palette_node_element draw2d_droppable" title="LT 100 3-Wire Transmitter"><img src="images/img/3_wireLT.jpg"></div>'
@@ -52,13 +58,20 @@ $(function () {
 				+'<div data-shape="FT_fourWireTrsmtr" class="palette_node_element draw2d_droppable" title="FT 100 4-Wire Transmitter"><img src="images/img/4wireFT100.png"></div>'
 				+'<div data-shape="FT_hartTrsmtr" class="palette_node_element draw2d_droppable" title="FT 100 HART Transmitter"><img src="images/img/heartFT.png"></div>'
 				+'<div data-shape="FT_FFTrsmtr" class="palette_node_element draw2d_droppable" title="FT 100 FF Transmitter"><img src="images/img/fft_FT100.png"></div>'
-				
+				+'<div style="clear: left;"></div>'
+				+'</div>'
 				//I2P symbols
-				+'<div data-shape="LY_100" class="palette_node_element draw2d_droppable" title="LY 100"><img src="images/img/I2P_LY100.png"></div>'
-				+'<div data-shape="TY_100" class="palette_node_element draw2d_droppable" title="TY 100"><img src="images/img/I2P_TY100.png"></div>'
-				+'<div data-shape="PY_100" class="palette_node_element draw2d_droppable" title="PY 100"><img src="images/img/I2P_PY100.png"></div>'
-				+'<div data-shape="FY_100" class="palette_node_element draw2d_droppable" title="FY 100"><img src="images/img/I2P_FY100.png"></div>'
+				+'<div id="I2PSymbols">'
+				+'<p>I/P Converter Symbols</p>'
+				+'<div data-shape="LY_100" class="palette_node_element draw2d_droppable" title="LY 100"><img src="images/img/I2p_LY100.png"></div>'
+				+'<div data-shape="TY_100" class="palette_node_element draw2d_droppable" title="TY 100"><img src="images/img/I2p_TY100.png"></div>'
+				+'<div data-shape="PY_100" class="palette_node_element draw2d_droppable" title="PY 100"><img src="images/img/I2p_PY100.png"></div>'
+				+'<div data-shape="FY_100" class="palette_node_element draw2d_droppable" title="FY 100"><img src="images/img/I2p_FY100.png"></div>'
+				+'<div style="clear: left;"></div>'
+				+'</div>'
 				
+				+'<div id="P2ESymbols">'
+				+'<p>P/E Converter Symbols</p>'
 				  // Pneumatic Transmitter  Symbols
 				+'<div data-shape="PT_LT_100" class="palette_node_element draw2d_droppable" title="Pneumatic Transmitter LT 100"><img src="images/img/PT_LT100.png"></div>'
 				+'<div data-shape="PT_TT_100" class="palette_node_element draw2d_droppable" title="Pneumatic Transmitter TT 100"><img src="images/img/PT_TT100.png"></div>'
@@ -70,13 +83,14 @@ $(function () {
 				+'<div data-shape="P2E_TY_100" class="palette_node_element draw2d_droppable" title="P/E Converter TY 100"><img src="images/img/P2E_TY100.png"></div>'
 				+'<div data-shape="P2E_PY_100" class="palette_node_element draw2d_droppable" title="P/E Converter PY 100"><img src="images/img/P2E_PY100.png"></div>'
 				+'<div data-shape="P2E_FY_100" class="palette_node_element draw2d_droppable" title="P/E Converter FY 100"><img src="images/img/P2E_FY100.png"></div>'
-				
-				
+				+'<div style="clear: left;"></div>'
 				+'</div>'
-				+'</div>'
+				
+				+'</div>' // main library close
+				
 				+'<nav class="col-md-9 col-sm-9" id = "toolbar">' 
 				//+'<button id = "save" style = "cursor: pointer; z-Index">Check Connections</button>'
-				+'</nav>'
+				+'</nav>'				
 				+'<div class="col-md-9 col-sm-9" id = "draw2Did">'
 				
 				//+'<h4 align = "center">Connections</h4>'
@@ -86,6 +100,9 @@ $(function () {
 		
 		$("#mainDiv").html(SymbolLibrary);
 		
+		
+		stop_timer();
+		set_timer();
 		
 		 app  = new example.Application(appId, type);
 		//var canvas = new example.View("draw2Did");

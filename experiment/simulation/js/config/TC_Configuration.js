@@ -108,6 +108,10 @@ TC_ConfigureLT = function(appId){
 		
 			
 			$("#TestDiv").html(configure);
+			
+			stop_timer();
+			set_timer();
+			
 		
 		//animLT.repeat(0);
 		TTCircle.attr({'fill':'green'});
@@ -161,24 +165,36 @@ TC_ConfigureLT = function(appId){
 						
 						if((selectedType == "twowire" && output == "0")|| (selectedType == "threewire" && output == "0")|| (selectedType == "fourwire" && output == "0")){
 							
-						   alertify.alert("Configuration is successful. Please click next level to do Electrical Wiring Connections of transmitter");
+						   alertify.alert('Success!!',"Configuration is successful. Please click next level to proceed for  wiring of transmitter");
+						   $(".ajs-header").css("background-color","#4CAF50");
+
 						   $("#TC_TTwiringDiagram").prop("hidden", false);
 						   $("#trsmtrType, #TC_spanLevel, #TC_Range, #output").prop("disabled", true);				   
 							
 						}else if(selectedType == "hart" && output == "1"){
 							
-							alertify.alert("Configuration is successful.  Please click next level to do Electrical Wiring Connections of transmitter");
+							alertify.alert('Success!!',"Configuration is successful. Please click next level to proceed for  wiring of transmitter");
+							$(".ajs-header").css("background-color","#4CAF50");
+
 						   $("#TC_TTwiringDiagram").prop("hidden", false);
 						   $("#trsmtrType, #TC_spanLevel, #TC_Range, #output").prop("disabled", true);
 						}else if(selectedType == "fftrans" && output == "2"){
 							
-							alertify.alert("Configuration is successful.  Please click next level to do Electrical Wiring Connections of transmitter");
+							alertify.alert('Success!!',"Configuration is successful. Please click next level to proceed for  wiring of transmitter");
+							$(".ajs-header").css("background-color","#4CAF50");
+
 						   $("#TC_TTwiringDiagram").prop("hidden", false);
 						   $("#trsmtrType, #TC_spanLevel, #TC_Range, #output").prop("disabled", true);
 						}else{
 							
-							alertify.alert("Please Select The Correct Output As Per Selected Transmitter Type");
+							alertify.alert('Alert',"Please Select The Correct Output As Per Selected Transmitter Type");
+							$(".ajs-header").css("background-color","#ce6058");
 						}
+						
+						
+						minutes = document.getElementById("minutes").textContent;
+		        		seconds = document.getElementById("seconds").textContent;        		
+//		        		console.log(minutes+":"+seconds);
 						
 						TC_configData.appId = appId;
 						TC_configData.trsmtrTpye = selectedType;
@@ -188,20 +204,29 @@ TC_ConfigureLT = function(appId){
 						TC_configData.configcnt = TC_ConfigFlagCnt;
 						TC_configData.lowerSpanLevel= lowerSpanLevel;
 						TC_configData.higherSpanLevel= higherSpanLevel;
+						TC_configData.configTimeInMin = minutes;
+						TC_configData.configTimeInSec = seconds;
+						
+						
 					//	console.log(TC_configData);
 						TC_appData.tcConfigData = TC_configData;
 					//	console.log(TC_appData);
 						ExpTrackData.tcAppData = TC_appData
 //						console.log(ExpTrackData);
 						$("#errRange" ).css("display","none");
+						
+						stop_timer();
+						
 					}else{
 						
 						if(TC_ConfigFlagCnt == 3){
 							$("#errRange" ).css("display","none");
-							alertify.alert("Range is incorrect \n Correct Range is: " +range.toFixed(2));						
+							alertify.alert('Alert',"Range is incorrect \n Correct Range is: " +range.toFixed(2));	
+							$(".ajs-header").css("background-color","#ce6058");
 						}else{
 							$("#errRange" ).css("display","none");
-							alertify.alert("Range is incorrect");
+							alertify.alert('Alert',"Range is incorrect");
+							$(".ajs-header").css("background-color","#ce6058");
 							TC_ConfigFlagCnt++;
 						}
 		
@@ -216,7 +241,8 @@ TC_ConfigureLT = function(appId){
 						
 					}else{
 						
-						alertify.alert("Please Select All The Fields");
+						alertify.alert('Alert',"Please Select All The Fields");
+						$(".ajs-header").css("background-color","#ce6058");
 						
 					}
 					

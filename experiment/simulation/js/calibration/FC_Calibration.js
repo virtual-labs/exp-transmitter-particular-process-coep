@@ -14,6 +14,8 @@
 	 var FColdreadingSorted = [];
 	 var FCarr_actualValSorted = [];
 	 var FCarr_stdValSorted = [];
+	 
+	 var fcflagSpan = false;
 	
 	 FColdreadingSorted = FColdreading.slice();
 	 FColdreadingSorted.sort(function(a, b) {
@@ -106,6 +108,9 @@
 	$("#TestNextDiv").html(FC_calibrationData);
 
 	
+	stop_timer();
+	set_timer();
+	
 	
 	
 	$('#submit_FCzeroerror_Calibration').on('click', function() {
@@ -124,6 +129,8 @@
 					if(($("#zeroerror").val() == '') ||  isNaN($("#zeroerror").val())){
 						
 						alertify.alert("Please Enter The Answer In Numeric Only").setHeader('<h4>Alert!!!</h4> '); 
+						$(".ajs-header").css("background-color","#ce6058");
+
 						
 					}else{
 						
@@ -153,10 +160,15 @@
 							}else if(FC0Err_cnt == 4){
 								
 								alertify.alert("Answer is incorrect").setHeader('<h4>Alert!!!</h4> ');
+								
 								alertify.alert("Correct Answer is: " + FC_ZeroError.toFixed(2)).setHeader('<h4>Alert!!!</h4> ');
+								$(".ajs-header").css("background-color","#ce6058");
+
 							}else{
 								
 								alertify.alert("Answer is incorrect").setHeader('<h4>Alert!!!</h4> ');
+								$(".ajs-header").css("background-color","#ce6058");
+
 								FC0Err_cnt++;
 							}
 							
@@ -182,6 +194,8 @@
 			if(($("#spanerror").val() == '') ||  isNaN($("#spanerror").val())){
 				
 				alertify.alert("Please Enter The Answer In Numeric Only").setHeader('<h4>Alert!!!</h4> ');
+				$(".ajs-header").css("background-color","#ce6058");
+
 				
 			}else{
 				
@@ -211,6 +225,9 @@
 					}else{
 						
 						alertify.alert("Answer is incorrect").setHeader('<h4>Alert!!!</h4> ');
+						$(".ajs-header").css("background-color","#ce6058");
+						
+
 						FCSpanErr_cnt++;
 					}
 					
@@ -304,6 +321,8 @@
 		if(($("#linearity").val() == '') ||  isNaN($("#linearity").val())){
 				
 				alertify.alert("Please Enter The Answer In Numeric Only").setHeader('<h4>Alert!!!</h4> ');
+				$(".ajs-header").css("background-color","#ce6058");
+
 				
 			}else{
 				
@@ -331,10 +350,16 @@
 				}else if(FC_LinearityErr_cnt == 4){
 						
 						alertify.alert("Answer is incorrect").setHeader('<h4>Alert!!!</h4> ');
+						$(".ajs-header").css("background-color","#ce6058");
+
 						alertify.alert("Correct Answer is: " + FC_linearity.toFixed(3)).setHeader('<h4>Alert!!!</h4> ');
+						$(".ajs-header").css("background-color","#ce6058");
+
 					}else{
 						
 						alertify.alert("Answer is incorrect").setHeader('<h4>Alert!!!</h4> ');
+						$(".ajs-header").css("background-color","#ce6058");
+
 						FC_LinearityErr_cnt++;
 					}
 					
@@ -364,7 +389,9 @@
 		   
 		   if(($("#Accuracy").val() == '') ||  isNaN($("#Accuracy").val())){
 				
-				alertify.alert("Please Enter The Answer In Numeric Only");
+				alertify.alert("Alert","Please Enter The Answer In Numeric Only");
+				$(".ajs-header").css("background-color","#ce6058");
+
 				
 			}else{
 				
@@ -397,11 +424,16 @@
 //						alertify.alert("Correct Answer is: " + FC_ZeroError.toFixed(3));
 					}else if(FC_AccuracyErr_cnt == 4){
 						
-						alertify.alert("Answer is incorrect");
-						alertify.alert("Correct Answer is: " + Avg_Accuracy.toFixed(2));
+						alertify.alert("Alert","Answer is incorrect");
+						
+
+						alertify.alert("Alert","Correct Answer is: " + Avg_Accuracy.toFixed(2));
+						$(".ajs-header").css("background-color","#ce6058");
 					}else{
 						
-						alertify.alert("Answer is incorrect");
+						alertify.alert("Alert","Answer is incorrect");
+						$(".ajs-header").css("background-color","#ce6058");
+
 						FC_AccuracyErr_cnt++;
 					}
 					
@@ -492,6 +524,48 @@
 						//$('#minus').hide();
 						//$('#plus').hide();
 						  $("#ZeroangleVal").val(FCarr_actualValSorted[0]);
+						  
+						  
+						  if(fcflagSpan == false){
+								 
+								
+									for( var i= 1; i<=(FCarr_actualValSorted.length-1); i++ )
+									{
+									
+									var oldval =  FCarr_actualValSorted[i];
+									var LinearityNewVal = (oldval - stepFix).toFixed(2);	
+//									console.log("oldvalue "+oldval+"new Value "+LinearityNewVal);
+									
+									 FCarr_actualValSorted.splice(i, 1, parseFloat(LinearityNewVal));
+									
+									 
+									}
+								 
+								 
+								 
+							 } else{
+								 
+							
+									for( var i= 1; i<=(FCarr_actualValSorted.length-2); i++ )
+									{
+									
+									var oldval =  FCarr_actualValSorted[i];
+									var LinearityNewVal = (oldval - stepFix).toFixed(2);	
+//									console.log("oldvalue "+oldval+"new Value "+LinearityNewVal);
+									
+									 FCarr_actualValSorted.splice(i, 1, parseFloat(LinearityNewVal));
+									
+									 
+									}
+								 
+								 
+							 }
+						  
+						  
+						  
+						  
+						  
+						  
 						drawGraph(FColdreadingSorted, FCarr_actualValSorted);	
 						
 //						console.log(FCarr_actualValSorted);
@@ -524,6 +598,47 @@
 								 FCarr_actualValSorted.splice(0, 1, parseFloat(ZeroValue));
 //								 console.log(FCarr_actualValSorted);
 								  $("#ZeroangleVal").val(FCarr_actualValSorted[0]);
+								  
+								  
+								  if(fcflagSpan == false){
+										 
+										
+										for( var i= 1; i<=(FCarr_actualValSorted.length-1); i++ )
+										{
+										
+										var oldval =  FCarr_actualValSorted[i];
+										var LinearityNewVal = (oldval - stepFix).toFixed(2);	
+//										console.log("oldvalue "+oldval+"new Value "+LinearityNewVal);
+										
+										 FCarr_actualValSorted.splice(i, 1, parseFloat(LinearityNewVal));
+										
+										 
+										}
+									 
+									 
+									 
+								 } else{
+									 
+								
+										for( var i= 1; i<=(FCarr_actualValSorted.length-2); i++ )
+										{
+										
+										var oldval =  FCarr_actualValSorted[i];
+										var LinearityNewVal = (oldval - stepFix).toFixed(2);	
+//										console.log("oldvalue "+oldval+"new Value "+LinearityNewVal);
+										
+										 FCarr_actualValSorted.splice(i, 1, parseFloat(LinearityNewVal));
+										
+										 
+										}
+									 
+									 
+								 }
+								  
+								  
+								  
+								  
+								  
 								 drawGraph(FColdreadingSorted, FCarr_actualValSorted);	
 				           }
 				   
@@ -578,6 +693,42 @@
 					    FCarr_actualValSorted.splice(0, 1, parseFloat(ZeroValue));
 //					    console.log(FCarr_actualValSorted);
 					 
+					    
+					    
+					    if(fcflagSpan == false){
+							 
+							
+							for( var i= 1; i<=(FCarr_actualValSorted.length-1); i++ )
+							{
+							
+							var oldval =  FCarr_actualValSorted[i];
+							var LinearityNewVal = (oldval + parseFloat(stepFix)).toFixed(2);	
+//							console.log("oldvalue "+oldval+"new Value "+LinearityNewVal);
+							
+							 FCarr_actualValSorted.splice(i, 1, parseFloat(LinearityNewVal));
+							
+							 
+							}
+						 
+						 
+						 
+					 } else{
+						 
+					
+							for( var i= 1; i<=(FCarr_actualValSorted.length-2); i++ )
+							{
+							
+							var oldval =  FCarr_actualValSorted[i];
+							var LinearityNewVal = (oldval + parseFloat(stepFix)).toFixed(2);	
+//							console.log("oldvalue "+oldval+"new Value "+LinearityNewVal);
+							
+							 FCarr_actualValSorted.splice(i, 1, parseFloat(LinearityNewVal));
+							
+							 
+							}
+						 
+						 
+					 }
 					
 				    
 				     var $elem = $('.icon-repeat1');
@@ -656,6 +807,24 @@
 				 ZeroValue = parseFloat((ZeroValue + parseFloat(stepFix)).toFixed(2));
 				 
 				//	console.log(SpanValue);
+				 
+				 
+				 
+					for( var i= 1; i<=(FCarr_actualValSorted.length-2); i++ )
+					{
+					
+					var oldval =  FCarr_actualValSorted[i];
+					var LinearityNewVal = (oldval + parseFloat(stepFix)).toFixed(2);	
+//					console.log("oldvalue "+oldval+"new Value "+LinearityNewVal);
+					
+					 FCarr_actualValSorted.splice(i, 1, parseFloat(LinearityNewVal));
+					
+					 
+					}
+				 
+				 
+				 
+				 
 					var SpanValueFix = SpanValue.toFixed(0);
 					
 					if(-(range) == n)
@@ -720,6 +889,21 @@
 					 ZeroValue = parseFloat((ZeroValue - parseFloat(stepFix)).toFixed(2));
 					 
 //						console.log(SpanValue);
+					 
+					 
+						for( var i= 1; i<=(FCarr_actualValSorted.length-2); i++ )
+						{
+						
+						var oldval =  FCarr_actualValSorted[i];
+						var LinearityNewVal = (oldval - parseFloat(stepFix)).toFixed(2);	
+//						console.log("oldvalue "+oldval+"new Value "+LinearityNewVal);
+						
+						 FCarr_actualValSorted.splice(i, 1, parseFloat(LinearityNewVal));
+						
+						 
+						}
+					 
+					 
 						var SpanValueFix = SpanValue.toFixed(0);
 						if(range == n)
 						{ 
@@ -737,6 +921,7 @@
 							//$('#ZeroErrorKnockData').hide();
 							$('#SpanErrorKnockSuccess').html('');
 							$('#SpanErrorKnockSuccess').html('<div class="alert alert-success">Span Adjusted Successfully!!!</div><div class="alert alert-danger">But Zero affected. <br/>Adjust Zero Again</div>');
+							fcflagSpan = true;
 							FCZero_Calibartion(range, 1);
 							
 							
@@ -813,10 +998,10 @@
 			 
 /// LINEARITY TOP MINUS CLICK  
 			 
-		
+//			 LinearityTopplus  LinearityTopminus	
 			 
 			 
-			 $('#LinearityTopminus').bind("click",function (event) {
+			 $('#LinearityTopplus').bind("click",function (event) {
 					linearityAlgo1Cnt++;
 				 $('#LinearityTopKnockSuccess').html('');
 				
@@ -826,7 +1011,7 @@
 					 var n = angle.toFixed(2);
 //					 console.log("angle "+n);
 				      
-					 $('#LinearityTopplus').show();
+					 $('#LinearityTopminus').show();
 
 					
 					
@@ -834,7 +1019,7 @@
 						{
 						
 						var oldval =  FCarr_actualValSorted[i];
-						var LinearityNewVal = (oldval - stepFix).toFixed(2);	
+						var LinearityNewVal = (oldval + stepFix).toFixed(2);	
 //						console.log("oldvalue "+oldval+"new Value "+LinearityNewVal);
 						
 						 FCarr_actualValSorted.splice(i, 1, parseFloat(LinearityNewVal));
@@ -844,7 +1029,7 @@
 								
 					 if(defError == n)
 						{
-						 $('#LinearityTopminus').hide();
+						 $('#LinearityTopplus').hide();
 						 $('#LinearitySectionOneKnockData').hide();
 							// $('#LinearityKnockSuccess').html('');
 						$('#LinearityTopKnockSuccess').html('<div class="alert alert-success">Linearity Algorithm 1 Adjusted Successfully!!!</div>');
@@ -898,8 +1083,10 @@
 				 });
 			 
 		// LINEARITY TOP PLUS CLICK	 
+			 
+//			 LinearityTopplus  LinearityTopminus
 
-				 $('#LinearityTopplus').bind("click",function (event) {
+				 $('#LinearityTopminus').bind("click",function (event) {
 						linearityAlgo1Cnt++;
 
 //	                 console.log(defError);
@@ -908,7 +1095,7 @@
 						 var n = angle.toFixed(2);
 //						 console.log("angle "+n);
 					      
-						 $('#LinearityTopminus').show();
+						 $('#LinearityTopplus').show();
 
 						
 						
@@ -916,7 +1103,7 @@
 							{
 							
 							var oldval =  FCarr_actualValSorted[i];
-							var LinearityNewVal = (oldval + stepFix).toFixed(2);	
+							var LinearityNewVal = (oldval - stepFix).toFixed(2);	
 //							console.log("oldvalue "+oldval+"  new Value "+LinearityNewVal);
 							
 							 FCarr_actualValSorted.splice(i, 1, parseFloat(LinearityNewVal));
@@ -926,7 +1113,7 @@
 									
 						 if((-defError) == n)
 							{
-							 $('#LinearityTopplus').hide();
+							 $('#LinearityTopminus').hide();
 							// $('#LinearityKnockSuccess').html('');
 							 $('#LinearityTopKnockSuccess').html('<div class="alert alert-danger">Linearity Algorithm 1 not Adjusted </div>');
 							 }
@@ -1037,9 +1224,9 @@
 			
 			/// LINEARITY BOTTOM MINUS CLICK  
 			 
-			
+//			     LinearityBottomminus  LinearityBottomplus
 					 
-					 $('#LinearityBottomminus').bind("click",function (event) {
+					 $('#LinearityBottomplus').bind("click",function (event) {
 
 						 linearityAlgo2Cnt++;
 						
@@ -1049,7 +1236,7 @@
 							 var n = angle.toFixed(2);
 //							 console.log("angle "+n);
 						      
-							 $('#LinearityBottomplus').show();
+							 $('#LinearityBottomminus').show();
 
 							
 //							 console.log("negative value Index "+negativeValueIndex);
@@ -1059,7 +1246,7 @@
 								 
 								var oldval =  FCarr_actualValSorted[negativeValueIndex[i]];
 								
-								var LinearityNewVal = (oldval - stepFix).toFixed(2);	
+								var LinearityNewVal = (oldval + stepFix).toFixed(2);	
 //								console.log("IN Minus old negative value "+oldval+"  new Value "+LinearityNewVal);
 								
 								 FCarr_actualValSorted.splice(negativeValueIndex[i], 1, parseFloat(LinearityNewVal));
@@ -1073,7 +1260,7 @@
 								 
 								var oldval =  FCarr_actualValSorted[positiveValueIndex[i]];
 							    //var idx = positiveValueIndex[i] - 1;
-								var LinearityNewVal = (oldval - stepFix).toFixed(2);	
+								var LinearityNewVal = (oldval + stepFix).toFixed(2);	
 								//console.log("IN Plus old positive value "+oldval+"  VALUE TOBE MINUS "+stepedby10arr[idx]+
 								//		"   new Value "+LinearityNewVal);
 								
@@ -1084,7 +1271,7 @@
 							 
 							 if(-(defError) == n)
 								{
-								 $('#LinearityBottomminus').hide();
+								 $('#LinearityBottomplus').hide();
 								$('#LinearitySectionOneKnockData').hide();
 								// $('#LinearityKnockSuccess').html('');
 								$('#LinearityBottomKnockSuccess').html('<div class="alert alert-danger">Linearity Algorithm 2 not Adjusted!!!</div>');
@@ -1133,8 +1320,10 @@
 			 
 			 
 				// LINEARITY BOTTOM PLUS CLICK	 
+					 
+//				     LinearityBottomminus  LinearityBottomplus
 
-						 $('#LinearityBottomplus').bind("click",function (event) {
+						 $('#LinearityBottomminus').bind("click",function (event) {
 							 linearityAlgo2Cnt++;
 							 $('#LinearityBottomKnockSuccess').html('');
 
@@ -1144,7 +1333,7 @@
 								 var n = angle.toFixed(2);
 //								 console.log("angle "+n);
 							      
-								 $('#LinearityBottomminus').show();
+								 $('#LinearityBottomplus').show();
 								 
 								
 								 
@@ -1157,7 +1346,7 @@
 									 
 									var oldval =  FCarr_actualValSorted[negativeValueIndex[i]];
 									
-									var LinearityNewVal = (oldval + stepFix).toFixed(2);	
+									var LinearityNewVal = (oldval - stepFix).toFixed(2);	
 //									console.log("Plus old negative value "+oldval +"  new Value "+LinearityNewVal);
 									
 									 FCarr_actualValSorted.splice(negativeValueIndex[i], 1, parseFloat(LinearityNewVal));
@@ -1170,7 +1359,7 @@
 									 
 									var oldval =  FCarr_actualValSorted[positiveValueIndex[i]];
 								    //var idx = positiveValueIndex[i] - 1;
-									var LinearityNewVal = (oldval + stepFix).toFixed(2);	
+									var LinearityNewVal = (oldval - stepFix).toFixed(2);	
 									//console.log("IN Plus old positive value "+oldval+"  VALUE TOBE MINUS "+stepedby10arr[idx]+
 									//		"   new Value "+LinearityNewVal);
 									
@@ -1181,7 +1370,7 @@
 											
 								 if(defError == n)
 									{
-									 $('#LinearityBottomplus').hide();
+									 $('#LinearityBottomminus').hide();
 									 $('#LinearitySectionTwoKnockData').hide();
 									// $("#LinearityTopKnotch").prop("hidden", false);
 									// $("#LinearityBottomKnotch").prop("hidden", false);
@@ -1614,9 +1803,9 @@
 
 				+ '</table>'
 				+ '</div>'
-
-				+ '<div class="col-md-12" ><p>After few months transmitter is not working properly.  As a maintenance engineer, Please attend the fault &nbsp;&nbsp; </p>'
-				
+                
+//				+ '<div class="col-md-12" ><p>After few months transmitter is not working properly.  As a maintenance engineer, Please attend the fault &nbsp;&nbsp; </p>'
+				+ '<div class="col-md-12" ><p>After few months it is observed that transmitter is not working properly. As a maintenance engineer, please identify and rectify the fault &nbsp;&nbsp; </p>'
 	               + '<button id="FC_FaultChecking">Next level</button>'
 					+'</div>'
 
@@ -1666,10 +1855,20 @@
 		FCCalibrationData.fcLinearAlgo2AdjustCnt = linearityAlgo2Cnt;
 		FCCalibrationData.fcLinearAlgo3AdjustCnt = linearityAlgo3Cnt;
 		
+		minutes = document.getElementById("minutes").textContent;
+		seconds = document.getElementById("seconds").textContent;        		
+//		console.log(minutes+":"+seconds);
+		
+		FCCalibrationData.fcCalibrationTimeInMin = minutes;		
+		FCCalibrationData.fcCalibrationTimeInSec = seconds;
+		
 		
 		ExpTrackData.fcCalibrationData = FCCalibrationData;
 		
 //		console.log(ExpTrackData);
+		
+		
+		stop_timer();
 		
 		
 		$('#FC_FaultChecking').on('click', function() {
@@ -1688,7 +1887,7 @@
 				x : FColdreadingSorted[j],
 				y : FCarr_actualValSorted[j],
 				markerType : "circle",
-				markerSize : 10
+				markerSize : 8
 
 			};
 			OldValue.push(olValueJson);
@@ -1696,96 +1895,99 @@
 					x : FColdreadingSorted[j],
 					y : FCarr_stdValSorted[j],
 					markerType : "circle",
-					markerSize : 10
+					markerSize : 8
 
 				};
 			StdValue.push(stdValueJson);
 			
 		}
-		// console.log(OldValue);
-		var chart = new CanvasJS.Chart("FC_chartContainer",
-				{
-					animationEnabled : true,
-					theme : "light2",
-					title : {
-						text : "Flow Control System",
-						fontSize : 20,
-					},
-
-					axisX : {
-						title : "output",
-						crosshair : {
-							enabled : true,
-							snapToDataPoint : true
-						},
-					// ticks: {suggestedMin: 2, max:6}
-					},
-					axisY : {
-						title : "input",
-						minimum : 3,
-						maximum : 21
-					},
-
-					toolTip : {
-						shared : true
-					},
-					legend : {
-						cursor : "pointer",
-						verticalAlign : "bottom",
-						horizontalAlign : "right",
-						dockInsidePlotArea : true,
-						itemclick : toogleDataSeries
-					},
-					data : [  {
-						type : "line",
-						showInLegend : true,
-						name : "Standard Output",
-						// lineDashType: "dash",
-						color : "#39FF14",
-						dataPoints : [ {
-							x : lowerSpLevel,
-							y : 4
-						}, {
-							x : higherSpLevel,
-							y : 20
-						} ]
-					}, {
-						type : "scatter",
-						showInLegend : true,
-						name : "Observed Output",
-						markerType : "circle",
-						// xValueFormatString: "DD MMM,
-						// YYYY",
-						color : "#F08080",
-
-						dataPoints : OldValue
-					}
-//					, {
+//		 console.log(OldValue);
+		
+		 FC_Updategraph(OldValue,lowerSpLevel, higherSpLevel);
+//		var chart = new CanvasJS.Chart("FC_chartContainer",
+//				{
+//					animationEnabled : true,
+//					theme : "light2",
+//					title : {
+//						text : "Flow Control System",
+//						fontSize : 20,
+//					},
+//
+//					axisX : {
+//						title : "Input flow (lph)",
+//						crosshair : {
+//							enabled : true,
+//							snapToDataPoint : true
+//						},
+//					// ticks: {suggestedMin: 2, max:6}
+//					},
+//					axisY : {
+//						title : "Output (mA)",
+//						minimum : 0,
+//						maximum : 25,
+//						interval: 1
+//						},
+//
+//					toolTip : {
+//						shared : true
+//					},
+//					legend : {
+//						cursor : "pointer",
+//						verticalAlign : "bottom",
+//						horizontalAlign : "right",
+//						dockInsidePlotArea : true,
+//						itemclick : toogleDataSeries
+//					},
+//					data : [  {
+//						type : "line",
+//						showInLegend : true,
+//						name : "Standard Output",
+//						// lineDashType: "dash",
+//						color : "#39FF14",
+//						dataPoints : [ {
+//							x : lowerSpLevel,
+//							y : 4
+//						}, {
+//							x : higherSpLevel,
+//							y : 20
+//						} ]
+//					}, {
 //						type : "scatter",
 //						showInLegend : true,
 //						name : "Observed Output",
-//						markerType : "triangle",
+//						markerType : "circle",
 //						// xValueFormatString: "DD MMM,
 //						// YYYY",
-//						color : "#000",
+//						color : "#F08080",
 //
-//						dataPoints : StdValue
+//						dataPoints : OldValue
 //					}
-					
-					]
-				});
-		chart.render();
-
-		function toogleDataSeries(e) {
-			if (typeof (e.dataSeries.visible) === "undefined"
-					|| e.dataSeries.visible) {
-				e.dataSeries.visible = false;
-			} else {
-				e.dataSeries.visible = true;
-			}
-			chart.render();
-		}
-		
+////					, {
+////						type : "scatter",
+////						showInLegend : true,
+////						name : "Observed Output",
+////						markerType : "triangle",
+////						// xValueFormatString: "DD MMM,
+////						// YYYY",
+////						color : "#000",
+////
+////						dataPoints : StdValue
+////					}
+//					
+//					]
+//				});
+//		chart.render();
+//
+//		function toogleDataSeries(e) {
+//			if (typeof (e.dataSeries.visible) === "undefined"
+//					|| e.dataSeries.visible) {
+//				e.dataSeries.visible = false;
+//			} else {
+//				e.dataSeries.visible = true;
+//			}
+//			chart.render();
+//		}
+//		
 		 
 		
 		

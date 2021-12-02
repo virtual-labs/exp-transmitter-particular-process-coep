@@ -1113,7 +1113,7 @@ mso-displayed-thousand-separator
 	box-shadow: 0 5px #666;
 	transform: translateY(4px);
 }
-#questionDiv{height:auto;overflow:scroll;padding-bottom:100px;}
+#questionDiv{}
 .QueHead{font-size: 18px;
       font-size: 22px;
     font-weight: bold;
@@ -1136,7 +1136,7 @@ mso-displayed-thousand-separator
 	z-index:1111;
 	padding: 10px;
 	color: #fff;
-	font-size: 18px;
+	font-size: 16px;
 	border-radius: 10px;
 	background-color: #666;
 	margin-right:28px;

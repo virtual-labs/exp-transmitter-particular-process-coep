@@ -55,7 +55,9 @@ showFC_Questions = function(appId){
 		
 			
 			$("#TestDiv").html(FC_questions);
-		
+			
+			stop_timer();
+			set_timer();
 		
 	
 	$('#testSubmit').on(
@@ -82,7 +84,9 @@ showFC_Questions = function(appId){
 										
 										if (myRadio == null) {
 											flag = flag && false;
-											alertify.alert('Please attempt all the questions');
+											alertify.alert("Alert",'Please attempt all the questions');
+											$(".ajs-header").css("background-color","#ce6058");
+
 											break;
 										}
 										arr.push({
@@ -106,15 +110,25 @@ showFC_Questions = function(appId){
 							}
 						}
 						
+						
+						minutes = document.getElementById("minutes").textContent;
+		        		seconds = document.getElementById("seconds").textContent;        		
+//		        		console.log(minutes+":"+seconds);
+						
 						FC_testData.appId = appId;
 						FC_testData.rightQuesCnt = ansCount;
+						FC_testData.TesttimeinMin = minutes;
+						FC_testData.TesttimeinSec = seconds;		
 					//	console.log(FC_testData);
 						FC_appData.fcTestData = FC_testData
 					//	console.log(FC_appData);
 					    ExpTrackData.fcAppData = FC_appData
-//						console.log(ExpTrackData);
+	//					console.log(ExpTrackData);
 						
-						alertify.alert("Test Submitted Successfully <br/>Correct Answers Are : "+ansCount);
+						stop_timer();
+						
+						alertify.alert("Success!!","Test Submitted Successfully <br/>Correct Answers Are : "+ansCount);
+						$(".ajs-header").css("background-color","#4CAF50");
 						$("#FCnextLevel").prop("hidden", false);
 						}
 							
@@ -122,10 +136,12 @@ showFC_Questions = function(appId){
 	
 	$('#FCnextLevel').on(
 				'click', function() {
+					window.scrollTo(0,0);
 					if(myRadio != null){
 						
 					//	connectionLevel(appId);
 						$("#TestDiv").html('');
+						
 						var digramInstruction = '';
 						digramInstruction +='<div id="instructionDiv">'
 							+'<div class="row">'
@@ -153,7 +169,9 @@ showFC_Questions = function(appId){
 						
 					}else{
 						
-						alertify.alert("Please Submit The Test");
+						alertify.alert("Alert","Please Submit The Test");
+						$(".ajs-header").css("background-color","#ce6058");
+
 					}
 					
 					

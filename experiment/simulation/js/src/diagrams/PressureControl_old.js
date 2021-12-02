@@ -25,6 +25,7 @@ var width = $(window).width();
   }
     x = 390;
 	y = 290;
+
 	
 	var PL_tank = PL_Tank (x, y);
     PTCircle = PC_PTCircleWithLabel((x+150),(y-70), 25, "PT 100");	

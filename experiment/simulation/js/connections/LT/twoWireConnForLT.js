@@ -65,7 +65,8 @@ $.each(temp , function (key, value) {
 		 
 	 }else{
 		 
-		 alertify.alert("Do Some Connection");
+		 alertify.alert("Alert","Connect atleast one wire");
+		 $(".ajs-header").css("background-color","#ce6058");
 		 
 	 }
 	
@@ -77,8 +78,8 @@ $.each(temp , function (key, value) {
 CheckRightConnection_2wireLT = function(){
 	
 	if(psToTransPlus_LT == 1 && signToTransMinus_LT == 1 && psToSignMinus_LT == 1 && wrongConnection_2wireLT == 0){
-		
-		alertify.alert("Correct Connection. Please click next level");
+		alertify.alert('Success!!',"Correct Connection. Please click next level");
+		$(".ajs-header").css("background-color","#4CAF50");alertify.alert("Correct Connection. Please click next level");
 		app.toolbar.characterisation_Button.show();
 //		app.toolbar.characterisation_Button.hide();
 	    rightConn = 1;
@@ -90,11 +91,13 @@ CheckRightConnection_2wireLT = function(){
 		
 					if(ConnFlagCnt == 3){
 							app.toolbar.hintButton.show();							
-							alertify.alert("Wrong Connection");	
+							alertify.alert("Alert","Wrong Connection");
+							 $(".ajs-header").css("background-color","#ce6058");
 							rightConn = 0;		
 						}else{
 							
-							alertify.alert("Wrong Connection");
+							alertify.alert("Alert","Wrong Connection");
+							 $(".ajs-header").css("background-color","#ce6058");
 							ConnFlagCnt++
 							rightConn = 0;
 						}
@@ -114,7 +117,8 @@ CheckRightConnection_2wireLT = function(){
 	                    if(ConnFlagCnt == 3){
 							 app.toolbar.hintButton.show();
 							 
-							 alertify.alert("Wrong Connection");
+							 alertify.alert("Alert","Wrong Connection");
+							 $(".ajs-header").css("background-color","#ce6058");
 							 rightConn = 0;
 							 
 													
@@ -122,7 +126,8 @@ CheckRightConnection_2wireLT = function(){
 			
 							if(wrongConnection_2wireLT == 1){
 		
-							alertify.alert("Wrong Connection");
+								alertify.alert("Alert","Wrong Connection");
+								 $(".ajs-header").css("background-color","#ce6058");
 							ConnFlagCnt++;
 							rightConn = 0;
 		
