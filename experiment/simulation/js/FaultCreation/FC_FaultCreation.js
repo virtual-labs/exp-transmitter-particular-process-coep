@@ -83,7 +83,7 @@ FC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, FColdreadingSorted, FCa
 						+'<div class="col-md-12" id="FC_faultCkeck"  >'
 						+'<h1>Identify FT Fault </h1>'
 						+'<h6>In this level detect the fault in FT 100</h6>'
-						+'<p class="faultMsg">The Output of Transmitter shown in the table Identify the Fault </p>'
+						+'<p class="faultMsg">The output of the Transmitter is as shown in the table. Identify the Fault </p>'
 						
 						+'<div class="col-md-12" id="FC_FaultScroll"  >'
 						//table start
@@ -128,7 +128,7 @@ FC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, FColdreadingSorted, FCa
 						+ '<div class="form-group" style="margin:20px 0; font-size:15px; font-weight:bold;">'
 						+ '<label for="sel1" >Detect Fault:</label>'
 						+ '<select class="form-control"  id = "findFault_FC">'
-						+ ' <option  value="-1">Detect Fault</option>'
+						+ ' <option  value="-1">---Select Fault---</option>'
 						+ ' <option  value="1"> Impulse Line Block</option>'
 						+ '  <option value="2"> Transmitter is in saturation mode</option>'
 						+ '  <option value="3"> Transmitter'+"'"+'s electrical section is expose to noise</option>'
@@ -147,7 +147,8 @@ FC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, FColdreadingSorted, FCa
 						$('#mainDiv').html(FC_faultAdd);
 				
 				 
-						
+						stop_timer();
+						set_timer();
 						
 
 						
@@ -159,7 +160,9 @@ FC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, FColdreadingSorted, FCa
 							 
 							 if (selectedFault == -1) {
 
-								 alertify.alert("Please Select The Fault Type");
+								 alertify.alert("Alert","Please Select The Fault Type");
+								 $(".ajs-header").css("background-color","#ce6058");
+
 
 							 }else{
 								 
@@ -173,12 +176,29 @@ FC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, FColdreadingSorted, FCa
 									 FC_RightFault.push(FC_fault);
 									 
 									 if(FC_3FaultDetectionCnt == 3){
-										 alertify.alert("All Fault Detected Successfully !!!");
-										 $('#mainDiv').html('');
-											$('#mainDiv').html('<div class="col-md-offset-3 col-md-6 col-md-offset-3"><div class="alert alert-success" style="margin-top:150px; font-size:22px; font-weight:bold;">Congratulations!!! Flow Control system experiment is completed successfully!!</div></div>');
 										 
+										 
+										 minutes = document.getElementById("minutes").textContent;
+							        	 seconds = document.getElementById("seconds").textContent;        		
+//							        	 console.log(minutes+":"+seconds);
+							        	 
+							        	 ExpTrackData.fcFaultDetectionTimeInMin = minutes;
+							        	 ExpTrackData.fcFaultDetectionTimeInSec = seconds;
+//							        	 console.log(JSON.stringify(ExpTrackData));		
+							        	 
+							        	 stop_timer();
+										 
+										
+										 alertify.alert('Success!!', "All Fault Detected Successfully !!!");
+										 $(".ajs-header").css("background-color","#4CAF50");
+										 $("#Reqtimer").css("display","none");
+										 $('#mainDiv').html('');
+//											$('#mainDiv').html('<div class="col-md-offset-2 col-md-8 col-md-offset-2"><div class="alert alert-success" style="margin-top:50px; font-size:17px; font-weight:bold; text-align:center;">Congratulations!!!<br/> Flow Control system experiment is completed successfully!!</div></div>');
+										 FCAnalysis_TransmitterDB();
 									 }else{
-										 alertify.alert("Fault Detection Successful! Please detect another new fault");
+										 alertify.alert("Success","Fault Detection Successful! Please detect another fault");
+										 $(".ajs-header").css("background-color","#4CAF50");
+
 										 FC_FaultCheckFun(lowerSpLevel, higherSpLevel, FColdreadingSorted, FCarr_actualValSorted, FCarr_stdValSorted);
 									 }
 									    
@@ -204,12 +224,16 @@ FC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, FColdreadingSorted, FCa
 									 
 									 if(FC_faultcheckCnt == 2){
 										 
-										 alertify.alert("Wrong Fault..\nThe fault was '"+ FC_faultName +".' \nPlease try again for new fault"); 
+										 alertify.alert("Alert","The identified fault is wrong. \nThe fault was '"+ FC_faultName +".' \nPlease detect another fault."); 
+										 $(".ajs-header").css("background-color","#ce6058");
+
 										 FC_faultcheckCnt = 0;
 										 FC_FaultCheckFun(lowerSpLevel, higherSpLevel, FColdreadingSorted, FCarr_actualValSorted, FCarr_stdValSorted);
 										 
 									 }else{
-										 alertify.alert("Wrong Fault...Please Try Again  !!!");
+										 alertify.alert("Alert","Wrong Fault...Please Try Again  !!!");
+										 $(".ajs-header").css("background-color","#ce6058");
+
 									 }
 									
 								 }

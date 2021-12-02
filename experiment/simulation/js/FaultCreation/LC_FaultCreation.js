@@ -79,7 +79,8 @@ LC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, LColdreadingSorted, LCa
 						+'<div class="col-md-12" id="LC_faultCkeck"  >'
 						+'<h1>Identify LT Fault </h1>'
 						+'<h6>In this level detect the fault in LT 100</h6>'
-						+'<p class="faultMsg">The Output of Transmitter shown in the table Identify the Fault </p>'
+//						+'<div id="Reqtimer" class="col-md-12 col-sm-12"><i><label id="minutes">00</label><span>:</span><label id="seconds">00</label></i></div>'
+						+'<p class="faultMsg">The output of the Transmitter is as shown in the table. Identify the Fault </p>'
 						
 						+'<div class="col-md-12" id="LC_FaultScroll"  >'
 						//table start
@@ -124,7 +125,7 @@ LC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, LColdreadingSorted, LCa
 						+ '<div class="form-group" style="margin:20px 0; font-size:15px; font-weight:bold;">'
 						+ '<label for="sel1" >Detect Fault:</label>'
 						+ '<select class="form-control"  id = "findFault_LC">'
-						+ ' <option  value="-1">Detect Fault</option>'
+						+ ' <option  value="-1">---Select Fault---</option>'
 						+ ' <option  value="1"> Impulse Line Block</option>'
 						+ '  <option value="2"> Transmitter is in saturation mode</option>'
 						+ '  <option value="3"> Transmitter'+"'"+'s electrical section is expose to noise</option>'
@@ -143,6 +144,8 @@ LC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, LColdreadingSorted, LCa
 						$('#mainDiv').html(LC_faultAdd);
 				
 
+						stop_timer();
+						set_timer();
 						
 						
 						$('#LC_FindFault').on('click', function() {
@@ -152,26 +155,52 @@ LC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, LColdreadingSorted, LCa
 							 
 							 if (selectedFault == -1) {
 
-								 alertify.alert("Please Select The Fault Type");
+								 alertify.alert("Alert","Please Select The Fault Type");
+								 $(".ajs-header").css("background-color","#ce6058");
+
 
 							 }else{
 								 
 								 if(selectedFault == LC_fault){
+									 
 									 LC_faultcheckCnt = 0;
+									 
+									 
+									 
+									 
 									 ExpTrackData.lcFaultDetectionCnt = LC_wrongFaultCnt;
 									 
-//									 console.log(ExpTrackData);
+//									 console.log(JSON.stringify(ExpTrackData));
 									 
 									 LC_3FaultDetectionCnt++;
 									 LC_RightFault.push(LC_fault);
 									 
 									 if(LC_3FaultDetectionCnt == 3){
-										 alertify.alert("All Fault Detected Successfully !!!");
+										 
+										 
+										 minutes = document.getElementById("minutes").textContent;
+							        	 seconds = document.getElementById("seconds").textContent;        		
+//							        	 console.log(minutes+":"+seconds);
+							        	 
+							        	 ExpTrackData.lcFaultDetectionTimeInMin = minutes;
+							        	 ExpTrackData.lcFaultDetectionTimeInSec = seconds;
+//							        	 console.log(JSON.stringify(ExpTrackData));		
+							        	 
+							        	 stop_timer();
+										 
+										 alertify.alert('Success!!', "All Fault Detected Successfully !!!");
+										 $(".ajs-header").css("background-color","#4CAF50");
+										 $("#Reqtimer").css("display","none");
 										 $('#mainDiv').html('');
-											$('#mainDiv').html('<div class="col-md-offset-3 col-md-6 col-md-offset-3"><div class="alert alert-success" style="margin-top:150px; font-size:22px; font-weight:bold;">Congratulations!!! Level Control system experiment is completed successfully!!</div></div>');
+										 
+										 
+//											$('#mainDiv').html('<div class="col-md-offset-2 col-md-8 col-md-offset-2"><div class="alert alert-success" style="margin-top:50px; font-size:17px; font-weight:bold; text-align:center;">Congratulations!!! Level Control system experiment is completed successfully!!</div></div>');
+										 LCAnalysis_TransmitterDB();
 										 
 									 }else{
-										 alertify.alert("Fault Detection Successful! Please detect another new fault");
+										 alertify.alert("Success","Fault Detection Successful! Please detect another fault");
+										 $(".ajs-header").css("background-color","#4CAF50");
+
 										 LC_FaultCheckFun(lowerSpLevel, higherSpLevel, LColdreadingSorted, LCarr_actualValSorted, LCarr_stdValSorted);
 									 }
 									    
@@ -197,12 +226,17 @@ LC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, LColdreadingSorted, LCa
 									 
 									 if(LC_faultcheckCnt == 2){
 										 
-										 alertify.alert("Wrong Fault..\nThe fault was '"+ LC_faultName +".' \nPlease try again for new fault"); 
+										// alertify.alert("Wrong Fault..\nThe fault was '"+ LC_faultName +".' \nPlease try again for new fault"); 
+										 alertify.alert("Alert","The identified fault is wrong. \nThe fault was '"+ LC_faultName +".' \nPlease detect another fault."); 
+										 $(".ajs-header").css("background-color","#ce6058");
+
 										 LC_faultcheckCnt = 0;
 										 LC_FaultCheckFun(lowerSpLevel, higherSpLevel, LColdreadingSorted, LCarr_actualValSorted, LCarr_stdValSorted);
 										 
 									 }else{
-										 alertify.alert("Wrong Fault...Please Try Again  !!!");
+										 alertify.alert("Alert","Wrong Fault...Please Try Again  !!!");
+										 $(".ajs-header").css("background-color","#ce6058");
+
 									 }
 									
 								 }

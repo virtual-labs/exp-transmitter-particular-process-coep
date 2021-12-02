@@ -56,7 +56,8 @@ showPC_Questions = function(appId){
 			
 			$("#TestDiv").html(PC_questions);
 		
-		
+			stop_timer();
+			set_timer();
 	
 	$('#testSubmit').on(
 				'click', function() {
@@ -82,7 +83,9 @@ showPC_Questions = function(appId){
 										
 										if (myRadio == null) {
 											flag = flag && false;
-											alertify.alert('Please attempt all the questions');
+											alertify.alert("Alert",'Please attempt all the questions');
+											$(".ajs-header").css("background-color","#ce6058");
+
 											break;
 										}
 										arr.push({
@@ -106,15 +109,26 @@ showPC_Questions = function(appId){
 							}
 						}
 						
+						minutes = document.getElementById("minutes").textContent;
+		        		seconds = document.getElementById("seconds").textContent;        		
+//		        		console.log(minutes+":"+seconds);
+						
+						
 						PC_testData.appId = appId;
 						PC_testData.rightQuesCnt = ansCount;
+						PC_testData.TesttimeinMin = minutes;
+						PC_testData.TesttimeinSec = seconds;	
 					//	console.log(PC_testData);
 						PC_appData.pcTestData = PC_testData
 					//	console.log(PC_appData);
 						ExpTrackData.pcAppData = PC_testData
-//						console.log(ExpTrackData);
+	//					console.log(ExpTrackData);
 						
-						alertify.alert("Test Submitted Successfully <br/> Correct Answers Are : "+ansCount);
+						stop_timer();
+						
+//						alertify.alert("Test Submitted Successfully <br/> Correct Answers Are : "+ansCount);
+						alertify.alert("Success!!","Test Submitted Successfully <br/>Correct Answers Are : "+ansCount);
+						$(".ajs-header").css("background-color","#4CAF50");
 						$("#PCnextLevel").prop("hidden", false);
 						}
 							
@@ -122,6 +136,7 @@ showPC_Questions = function(appId){
 	
 	$('#PCnextLevel').on(
 				'click', function() {
+					window.scrollTo(0,0);
 					if(myRadio != null){
 						
 					//	connectionLevel(appId);
@@ -153,7 +168,9 @@ showPC_Questions = function(appId){
 						
 					}else{
 						
-						alertify.alert("Please Submit The Test");
+						alertify.alert("Alert","Please Submit The Test");
+						$(".ajs-header").css("background-color","#ce6058");
+
 					}
 					
 					

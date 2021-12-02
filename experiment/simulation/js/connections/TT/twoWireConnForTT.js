@@ -63,7 +63,8 @@ $.each(temp , function (key, value) {
 		 
 	 }else{
 		 
-		 alertify.alert("Do Some Connection");
+		 alertify.alert("Alert","Connect atleast one wire");
+		 $(".ajs-header").css("background-color","#ce6058");
 		 
 	 }
 	
@@ -76,7 +77,8 @@ CheckRightConnection_2wireTT = function(){
 	
 	if(psToTransPlus_TT == 1 && signToTransMinus_TT == 1 && psToSignMinus_TT == 1 && wrongConnection_2wireTT == 0){
 		
-		alertify.alert("Correct Connection. Please click next level");
+		alertify.alert('Success!!',"Correct Connection. Please click next level");
+		 $(".ajs-header").css("background-color","#4CAF50");
 		app.toolbar.characterisation_Button.show();
 	//	app.toolbar.characterisation_Button.hide();
 		rightConn = 1;
@@ -87,11 +89,13 @@ CheckRightConnection_2wireTT = function(){
 						if(ConnFlagCnt == 3){
 							app.toolbar.hintButton.show();
 							
-							alertify.alert("Wrong Connection");	
+							alertify.alert("Alert","Wrong Connection");
+							 $(".ajs-header").css("background-color","#ce6058");
 									rightConn = 0;
 						}else{
 							
-							alertify.alert("Wrong Connection");
+							alertify.alert("Alert","Wrong Connection");
+							 $(".ajs-header").css("background-color","#ce6058");
 							ConnFlagCnt++
 							rightConn = 0;
 						}
@@ -109,7 +113,8 @@ CheckWrongConnection_2wireTT = function(){
 						if(ConnFlagCnt == 3){
 							 app.toolbar.hintButton.show();
 							 
-							 alertify.alert("Wrong Connection");
+							 alertify.alert("Alert","Wrong Connection");
+							 $(".ajs-header").css("background-color","#ce6058");
 							 
 							 rightConn = 0;
 													
@@ -117,7 +122,8 @@ CheckWrongConnection_2wireTT = function(){
 			
 							if(wrongConnection_2wireTT == 1){
 		
-							alertify.alert("Wrong Connection");
+								alertify.alert("Alert","Wrong Connection");
+								 $(".ajs-header").css("background-color","#ce6058");
 							ConnFlagCnt++;
 							rightConn = 0;
 		

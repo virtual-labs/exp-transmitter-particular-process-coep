@@ -1,5 +1,9 @@
 @charset "utf-8";
 /* CSS Document */
+.modal-dialog {
+    width: 620px;
+    margin: 30px auto;
+}
 .modal-header {
     font-size: 21px;
     padding: 15px;
@@ -46,8 +50,9 @@
 	color: #696868;
 }
 
-#tramsTInst ol, li {
-	margin: 30px 0;
+#tramsTInst ol{margin:10px 0;}
+#tramsTInst li {
+	margin:10px 0;
 	text-align: justify;
 	padding: 0 10px 0 41px;
 	font-size: 15px;
@@ -139,25 +144,25 @@ h6 {
 #LC_FaultScroll {
 	padding-bottom: 100px;
 	overflow-y: scroll;
-	height: auto;
+	height: 600px;
 }
 
 #TC_FaultScroll {
 	padding-bottom: 100px;
 	overflow-y: scroll;
-	height: auto;
+	height: 600px;
 }
 
 #PC_FaultScroll {
 	padding-bottom: 100px;
 	overflow-y: scroll;
-	height: auto;
+	height: 600px;
 }
 
 #FC_FaultScroll {
 	padding-bottom: 100px;
 	overflow-y: scroll;
-	height: auto;
+	height: 600px;
 }
 
 p {
@@ -404,15 +409,14 @@ p {
 /*  LC_characterisation css start    */
 #LC_characterisationDIv {
 	/*width: 100%; */
-	overflow: scroll;
-	height: auto;
-	padding: 10px 10px 150px 10px;
+/* 	overflow: scroll; */
+/* 	height: 800px; */
+	padding: 10px 10px 20px 10px;
 }
 
 #TestNextDiv {
 	/*width: 100%; */
-	overflow: scroll;
-	height: auto;
+	
 	padding: 10px 10px 150px 10px;
 }
 
@@ -580,9 +584,9 @@ button.dt-button, div.dt-button, a.dt-button {
 
 #TC_characterisationDIv {
 	/*width: 100%; */
-	overflow: scroll;
-	height: auto;
-	padding: 10px 10px 150px 10px;
+/* 	overflow: scroll; */
+/* 	height: 800px; */
+	padding: 10px 10px 20px 10px;
 }
 
 #TC_characterisationDIv #submit_TC_WaterLevel, #TC_graph,
@@ -669,9 +673,9 @@ button.dt-button, div.dt-button, a.dt-button {
 }
 
 #PC_characterisationDIv { /*width: 100%; */
-	overflow: scroll;
-	height: auto;
-	padding: 10px 10px 150px 10px;
+/* 	overflow: scroll; */
+/* 	height: 800px; */
+	padding: 10px 10px 20px 10px;
 }
 
 #PC_characterisationDIv #submit_PC_WaterLevel, #PC_graph,
@@ -770,9 +774,9 @@ button.dt-button, div.dt-button, a.dt-button {
 
 #FC_characterisationDIv {
 	/*width: 100%; */
-	overflow: scroll;
-	height: auto;
-	padding: 10px 10px 150px 10px;
+/* 	overflow: scroll; */
+/* 	height: 800px; */
+	padding: 10px 10px 20px 10px;
 }
 
 #FC_characterisationDIv #table_IO_wrapper {

@@ -48,7 +48,9 @@ function TC_calstandVal(standVal, higherSpLevel, lowerSpLevel){
 
 
 
-TC_RandomErrArr = [5.00, 10.00, 15.00, 20.00, 25.00, 12.25, 15.25, 17.24, 11.10, 21.05, 22.00, 24.50, 23.15];
+//TC_RandomErrArr = [5.00, 10.00, 15.00, 20.00, 25.00, 12.25, 15.25, 17.24, 11.10, 21.05, 22.00, 24.50, 23.15];
+
+TC_RandomErrArr = [5.00, 10.00];
 
 //TC_RandomErrArr = [5.00, 10.00, 15.00, 20.00, 25.00];
 
@@ -86,7 +88,7 @@ var TC_formula_json = {
         return temp;
        },
 	"c": function (param) {
-		var temp = Math.sin(param)+param + tcZeroError + TC_DefaultErr;
+		var temp = Math.sin(param)+param + tcZeroError - TC_DefaultErr;
         return temp;
        },
 	"d":  function (param) {
@@ -94,7 +96,7 @@ var TC_formula_json = {
         return temp;
        },
 	"e":  function (param) {
-		var temp = Math.cos(param)+param + tcZeroError + TC_DefaultErr;
+		var temp = Math.cos(param)+param + tcZeroError - TC_DefaultErr;
         return temp;
        },
 	"f" : function (param) {
@@ -111,15 +113,15 @@ var TC_formula_json = {
        },
     	   
 	"i" : function (param) {
-		var temp = param + (0.01*param) + tcZeroError + TC_DefaultErr;
+		var temp = param + (0.01*param) + tcZeroError - TC_DefaultErr;
         return temp;
        }, 
 	"j" : function (param) {
-		var temp = param + (0.01*param) + tcZeroError + TC_DefaultErr;
+		var temp = param + (0.01*param) + tcZeroError - TC_DefaultErr;
         return temp;
        },
 	"k" : function (param) {
-		var temp = param + (0.01*param) + tcZeroError + TC_DefaultErr;
+		var temp = param + (0.01*param) + tcZeroError - TC_DefaultErr;
         return temp;
        },  
 	"l" : function (param) {
@@ -127,7 +129,7 @@ var TC_formula_json = {
         return temp;
        },  
 	"m" : function (param) {
-		var temp = param + (0.01*param) + tcZeroError + TC_DefaultErr;
+		var temp = param + (0.01*param) + tcZeroError - TC_DefaultErr;
         return temp;
        },  
 	"n" : function (param) {
@@ -139,7 +141,7 @@ var TC_formula_json = {
         return temp;
        },   
 	"p" : function (param) {
-		var temp = param + (0.015*param) + tcZeroError - TC_DefaultErr;
+		var temp = param + (0.015*param) + tcZeroError + TC_DefaultErr;
         return temp;
        },  
 	"q" : function (param) {
@@ -148,16 +150,16 @@ var TC_formula_json = {
        },
 	
 	"r" : function (param) {
-		var temp = param + (0.015*param) + tcZeroError - TC_DefaultErr;
+		var temp = param + (0.015*param) + tcZeroError + TC_DefaultErr;
         return temp;
        },
 	"s" : function (param) {
-		var temp = param + (0.01*param) + tcZeroError - TC_DefaultErr;
+		var temp = param + (0.01*param) + tcZeroError + TC_DefaultErr;
         return temp;
        },
 	   
 	"t" : function (param) {
-		var temp = param + (0.01*param) + tcZeroError - TC_DefaultErr;
+		var temp = param + (0.01*param) + tcZeroError + TC_DefaultErr;
         return temp;
        },  
 	   
@@ -171,7 +173,7 @@ var TC_formula_json = {
         return temp;
        },    
 	"w" : function (param) {
-		var temp = param + (0.015*param) + tcZeroError - TC_DefaultErr;
+		var temp = param + (0.015*param) + tcZeroError + TC_DefaultErr;
         return temp;
        },  
 	 "x" : function (param) {
@@ -179,12 +181,12 @@ var TC_formula_json = {
         return temp;
        },    
 	"y" : function (param) {
-		var temp = param + (0.015*param) + tcZeroError - TC_DefaultErr;
+		var temp = param + (0.015*param) + tcZeroError + TC_DefaultErr;
         return temp;
        },    
 	   
 	"z" : function (param) {
-		var temp = param + (0.015*param) + tcZeroError - TC_DefaultErr;
+		var temp = param + (0.015*param) + tcZeroError + TC_DefaultErr;
         return temp;
        },    
 	"aa" : function (param) {
@@ -221,7 +223,115 @@ var TC_formula_json = {
 
 
 
+function TCDrowGraph(){
+	
+	 datapoint0Arr = [];
+	 datapoint1Arr = [];
+	 datapoint2Arr = [];
+	 chart = new CanvasJS.Chart("TC_chartContainer",
+			{
+				animationEnabled : true,
+				theme : "light2",
+				title : {
+					text : "Temperature Control System",
+					fontSize : 20,
+				},
 
+				axisX : {
+					title : "Input Temperature (lph)",
+					crosshair : {
+						enabled : true,
+						snapToDataPoint : true
+					},
+				// ticks: {suggestedMin: 2, max:6}
+				},
+				axisY : {
+					title : "Output (mA)",
+					minimum : 0,
+					maximum : 22,
+					interval: 1
+				},
+
+				toolTip : {
+					shared : true
+				},
+				legend : {
+					cursor : "pointer",
+					verticalAlign : "bottom",
+					horizontalAlign : "right",
+					dockInsidePlotArea : true,
+					itemclick : toogleDataSeries
+				},
+				data : [ 
+					{
+					type : "scatter",
+					showInLegend : true,
+					name : "Observed Output",
+					markerType : "circle",
+					markerSize: 6,
+					// xValueFormatString: "DD MMM,
+					// YYYY",
+					color : "#F08080",
+
+					dataPoints : datapoint0Arr
+				} 
+//				{
+//					type : "line",
+//					showInLegend : true,
+//					name : "Observed Output line",
+////					markerSize: 5,
+//					// lineDashType: "dash",
+//					dataPoints :datapoint1Arr
+//				}
+				,{
+					type : "line",
+					showInLegend : true,
+					name : "Standard Output",
+//					markerSize: 5,
+					// lineDashType: "dash",
+					dataPoints :datapoint2Arr
+				} 
+				]
+			});
+	//chart.render();
+
+	function toogleDataSeries(e) {
+		if (typeof (e.dataSeries.visible) === "undefined"
+				|| e.dataSeries.visible) {
+			e.dataSeries.visible = false;
+		} else {
+			e.dataSeries.visible = true;
+		}
+//		chart.render();
+	}
+
+}
+
+
+function TC_Updategraph(OldValue,lowerSpLevel, higherSpLevel){
+	datapoint0Arr = OldValue;
+	chart.options.data[0].dataPoints = datapoint0Arr; 
+	datapoint1Arr.push({
+		x : lowerSpLevel,
+		y : OldValue[0].y
+	},
+	{
+		x : higherSpLevel,
+		y : OldValue[OldValue.length - 1].y
+	} );
+	
+	//chart.options.data[1].dataPoints = datapoint1Arr; 
+	datapoint2Arr.push({
+		x : lowerSpLevel,
+		y : 4
+	}, {
+		x : higherSpLevel,
+		y : 20
+	} );
+	
+	chart.options.data[1].dataPoints = datapoint2Arr; 
+	chart.render();
+}
 
 
 

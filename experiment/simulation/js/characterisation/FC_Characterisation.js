@@ -60,6 +60,10 @@
 			+'<div class="col-md-6 col-sm-12" id = "TestNextDiv" style="display:none">'
 			+'<div >'
 	$(mainDiv).html(FC_characterisation);
+	
+	stop_timer();
+	set_timer();
+	
 
 	var slider = document.getElementById("FC_tankLvl");
 	var output = document.getElementById("demo");
@@ -77,7 +81,9 @@
 						var waterlevel = slider.value;
 
 						if ($.inArray(parseFloat(waterlevel), FColdreading) >= 0) {
-							alertify.alert('This Value Reading is already Present. /n Please Select Another Value For Reading');
+							alertify.alert("Alert",'This Value Reading is already Present.  Please Select Another Value For Reading');
+							$(".ajs-header").css("background-color","#ce6058");
+
 						} else {
 							$("#FC_graph").prop("hidden", false);
 							var trueReading = ((waterlevel - lowerSpLevel) * 100)
@@ -156,7 +162,7 @@
 										// +'</tr><tr><td>'+(readingcnt+1)+'</td><td>'+waterlevel+'</td><td>'+actualVal+'</td></tr>'
 										// +'</table>'
 										+ '</div>'
-										+ '<div id="FC_chartContainer" class="col-md-12"style="height: 400px; width: 90%; padding:0 5%"></div>'
+										+ '<div id="FC_chartContainer" class="col-md-12"style="height: 400px; width: 90%; padding:0 5%" hidden></div>'
 										// +'<div id = "FCgraphContainer" >'
 										+ '</div>';
 
@@ -225,12 +231,14 @@
 
 						if (readingcnt < numofReading) {
 
-							alertify.alert("Please take at least " + numofReading
+							alertify.alert("Alert","Please take at least " + numofReading
 									+ " readings");
+							$(".ajs-header").css("background-color","#ce6058");
 						}
-
+						
 						if (readingcnt >= numofReading) {
-
+							$("#FC_chartContainer").prop("hidden", false);	
+							window.scrollTo(0,$('#FC_characterisationDIv').height());
 //							FColdreadingForGraph.push(parseFloat(waterlevel));
 							FColdreadingForGraph.sort(function(a, b) {
 								return a - b
@@ -243,80 +251,14 @@
 										x : FColdreadingForGraph[j],
 										y : FCarr_actualVal[FColdreading.indexOf(FColdreadingForGraph[j])],
 									markerType : "circle",
-									markerSize : 10
+									markerSize : 8
 
 								};
 								OldValue.push(olValueJson);
 							}
-							// console.log(OldValue);
-							var chart = new CanvasJS.Chart("FC_chartContainer",
-									{
-										animationEnabled : true,
-										theme : "light2",
-										title : {
-											text : "Flow Control System",
-											fontSize : 20,
-										},
-
-										axisX : {
-											title : "output",
-											crosshair : {
-												enabled : true,
-												snapToDataPoint : true
-											},
-										// ticks: {suggestedMin: 2, max:6}
-										},
-										axisY : {
-											title : "input",
-											minimum : 3,
-											maximum : 21
-										},
-
-										toolTip : {
-											shared : true
-										},
-										legend : {
-											cursor : "pointer",
-											verticalAlign : "bottom",
-											horizontalAlign : "right",
-											dockInsidePlotArea : true,
-											itemclick : toogleDataSeries
-										},
-										data : [ {
-											type : "scatter",
-											showInLegend : true,
-											name : "Observed Output",
-											markerType : "circle",
-											// xValueFormatString: "DD MMM,
-											// YYYY",
-											color : "#F08080",
-
-											dataPoints : OldValue
-										}, {
-											type : "line",
-											showInLegend : true,
-											name : "Standard Output",
-											// lineDashType: "dash",
-											dataPoints : [ {
-												x : lowerSpLevel,
-												y : 4
-											}, {
-												x : higherSpLevel,
-												y : 20
-											} ]
-										} ]
-									});
-							chart.render();
-
-							function toogleDataSeries(e) {
-								if (typeof (e.dataSeries.visible) === "undefined"
-										|| e.dataSeries.visible) {
-									e.dataSeries.visible = false;
-								} else {
-									e.dataSeries.visible = true;
-								}
-								chart.render();
-							}
+//							 console.log(OldValue);
+							 FCDrowGraph();
+							 FC_Updategraph(OldValue,lowerSpLevel, higherSpLevel);
 							$("#FC_calibration").prop("hidden", false);
 						}
 
@@ -332,14 +274,16 @@
 
 		if(FColdreadingForGraph.indexOf(lowerSpLevel) == -1){
 			
-			alertify.alert("Please Select Lower Span Value And Plot The Graph Again");
+			alertify.alert("Alert","Please Select Lower Span Value And Plot The Graph Again");
+			$(".ajs-header").css("background-color","#ce6058");
 			$("#FC_calibration").prop("hidden", true);
 			$("#FC_graph").prop("hidden", true);			
 			$("#FC_chartContainer").html('');
 			
 		}else if(FColdreadingForGraph.indexOf(higherSpLevel) == -1){
 			
-			alertify.alert("Please Select Higher Span Value And Plot The Graph Again");
+			alertify.alert("Alert","Please Select Higher Span Value And Plot The Graph Again");
+			$(".ajs-header").css("background-color","#ce6058");
 			$("#FC_calibration").prop("hidden", true);
 			$("#FC_graph").prop("hidden", true);	
 			$("#FC_chartContainer").html('');
@@ -347,9 +291,17 @@
 			
 		}else{
 			
+			minutes = document.getElementById("minutes").textContent;
+    		seconds = document.getElementById("seconds").textContent;        		
+//    		console.log(minutes+":"+seconds);
+			
+			
+			
 			FC_CharacterisationData.fcreading = FColdreading;
 			FC_CharacterisationData.fcactualVal = FCarr_actualVal;
 			FC_CharacterisationData.fcstdVal = FCarr_stdVal;
+			FC_CharacterisationData.CharacTimeInMin = minutes;
+			FC_CharacterisationData.CharacTimeInSec = seconds;
 			
 //			console.log(FC_CharacterisationData);
 			
@@ -357,6 +309,8 @@
 			ExpTrackData.fcCharactData = FC_CharacterisationData;
 			
 //			console.log(ExpTrackData);
+			
+			stop_timer();
 			
 			
 			FC_calibrationFun(lowerSpLevel, higherSpLevel, FColdreading, FCarr_actualVal, FCarr_stdVal); 

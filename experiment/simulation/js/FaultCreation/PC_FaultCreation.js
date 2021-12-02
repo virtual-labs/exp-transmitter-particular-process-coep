@@ -83,7 +83,7 @@ PC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, PColdreadingSorted, PCa
 						+'<div class="col-md-12" id="PC_faultCkeck"  >'
 						+'<h1>Identify PT Fault </h1>'
 						+'<h6>In this level detect the fault in PT 100</h6>'
-						+'<p class="faultMsg">The Output of Transmitter shown in the table Identify the Fault </p>'
+						+'<p class="faultMsg">The output of the Transmitter is as shown in the table. Identify the Fault </p>'
 						+'<div class="col-md-12" id="PC_FaultScroll"  >'
 						//table start
 						+ '<table id="PC_DataTable_IO" class="table table-striped table-bordered" style="width:100%">'
@@ -127,7 +127,7 @@ PC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, PColdreadingSorted, PCa
 						+ '<div class="form-group" style="margin:20px 0; font-size:15px; font-weight:bold;">'
 						+ '<label for="sel1" >Detect Fault:</label>'
 						+ '<select class="form-control"  id = "findFault_PC">'
-						+ ' <option  value="-1">Detect Fault</option>'
+						+ ' <option  value="-1">---Select Fault---</option>'
 						+ ' <option  value="1"> Impulse Line Block</option>'
 						+ '  <option value="2"> Transmitter is in saturation mode</option>'
 						+ '  <option value="3"> Transmitter'+"'"+'s electrical section is expose to noise</option>'
@@ -147,6 +147,8 @@ PC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, PColdreadingSorted, PCa
 				
 	 
 						
+						stop_timer();
+						set_timer();
 						
 
 						
@@ -158,7 +160,9 @@ PC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, PColdreadingSorted, PCa
 							 
 							 if (selectedFault == -1) {
 
-								 alertify.alert("Please Select The Fault Type");
+								 alertify.alert("Alert","Please Select The Fault Type");
+								 $(".ajs-header").css("background-color","#ce6058");
+
 
 							 }else{
 								 
@@ -172,12 +176,29 @@ PC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, PColdreadingSorted, PCa
 									 PC_RightFault.push(PC_fault);
 									 
 									 if(PC_3FaultDetectionCnt == 3){
-										 alertify.alert("All Fault Detected Successfully !!!");
-										 $('#mainDiv').html('');
-											$('#mainDiv').html('<div class="col-md-offset-3 col-md-6 col-md-offset-3"><div class="alert alert-success" style="margin-top:150px; font-size:22px; font-weight:bold;">Congratulations!!! Pressure Control system experiment is completed successfully!!</div></div>');
 										 
+										 
+										 minutes = document.getElementById("minutes").textContent;
+							        	 seconds = document.getElementById("seconds").textContent;        		
+//							        	 console.log(minutes+":"+seconds);
+							        	 
+							        	 ExpTrackData.pcFaultDetectionTimeInMin = minutes;
+							        	 ExpTrackData.pcFaultDetectionTimeInSec = seconds;
+//							        	 console.log(JSON.stringify(ExpTrackData));		
+							        	 
+							        	 stop_timer();
+										 
+										 
+										 alertify.alert('Success!!', "All Fault Detected Successfully !!!");
+										 $(".ajs-header").css("background-color","#4CAF50");
+										 $("#Reqtimer").css("display","none");
+										 $('#mainDiv').html('');
+//											$('#mainDiv').html('<div class="col-md-offset-2 col-md-8 col-md-offset-2"><div class="alert alert-success" style="margin-top:50px; font-size:17px; font-weight:bold; text-align:center;">Congratulations!!! Pressure Control system experiment is completed successfully!!</div></div>');
+										 PCAnalysis_TransmitterDB();
 									 }else{
-										 alertify.alert("Fault Detection Successful! Please detect another new fault");
+										 alertify.alert("Success","Fault Detection Successful! Please detect another fault");
+										 $(".ajs-header").css("background-color","#4CAF50");
+
 										 PC_FaultCheckFun(lowerSpLevel, higherSpLevel, PColdreadingSorted, PCarr_actualValSorted, PCarr_stdValSorted);
 									 }
 									    
@@ -203,12 +224,17 @@ PC_FaultCheckFun = function(lowerSpLevel, higherSpLevel, PColdreadingSorted, PCa
 									 
 									 if(PC_faultcheckCnt == 2){
 										 
-										 alertify.alert("Wrong Fault..\nThe fault was '"+ PC_faultName +".' \nPlease try again for new fault"); 
+//										 alertify.alert("Wrong Fault..\nThe fault was '"+ PC_faultName +".' \nPlease try again for new fault"); 
+										 alertify.alert("ALert","The identified fault is wrong. \nThe fault was '"+ PC_faultName +".' \nPlease detect another fault."); 
+										 $(".ajs-header").css("background-color","#ce6058");
+
 										 PC_faultcheckCnt = 0;
 										 PC_FaultCheckFun(lowerSpLevel, higherSpLevel, PColdreadingSorted, PCarr_actualValSorted, PCarr_stdValSorted);
 										 
 									 }else{
-										 alertify.alert("Wrong Fault...Please Try Again  !!!");
+										 alertify.alert("Alert","Wrong Fault...Please Try Again  !!!");
+										 $(".ajs-header").css("background-color","#ce6058");
+
 									 }
 									
 								 }
