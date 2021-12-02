@@ -1,0 +1,488 @@
+﻿<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<title>Configure a Transmitter for a particular process application</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <link href="css/homePage.css" rel="stylesheet"
+	type="text/css">
+  <link type="text/css" rel="stylesheet" href="css/application.css" />
+  <link type="text/css" rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link href="css/Transmitter.css" rel="stylesheet"
+	type="text/css">
+<link href="css/font-awesome.css" rel="stylesheet"
+	type="text/css">
+	
+<link href="css/Analysis.css" rel="stylesheet"
+	type="text/css">
+<link href="css/animate.css" rel="stylesheet" type="text/css">
+
+<link href="css/onlineAssert/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="css/onlineAssert/buttons.bootstrap.min.css" rel="stylesheet">
+<!-- CSS -->
+<link rel="stylesheet" href="css/onlineAssert/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="css/onlineAssert/default.min.css"/>
+
+  <script src="js/lib/jquery.js"></script>
+  <script src="js/lib/jquery-ui.js"></script>
+  <script src="js/lib/jquery.browser.js"></script>
+  <script src="js/onlineAssert/rangeslider.min.js"></script>
+  
+  <script type="text/javascript" src="js/lib/raphael.js"></script>
+  <script type="text/javascript" src="js/lib/Class.js"></script>
+   <script type="text/javascript" src="js/lib/shifty.js"></script>
+   <script type="text/javascript" src="js/lib/canvg.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.autoresize.js"></script>
+	
+   <script type="text/javascript" src="js/lib/jquery-touch_punch.js"></script>
+   <script type="text/javascript" src="js/lib/pathfinding-browser.min.js"></script>
+   <script type="text/javascript" src="js/lib/StackBlur.js"></script>
+  
+  <script src="js/dist/draw2d.js"></script>
+    
+	<style>
+	.fa-plus-square {
+    font-size: 46px;
+    color: green;
+    margin-left: -10px;
+}
+	.fa-minus-square {
+	font-size: 46px;
+	color: red;
+margin-left:-20px
+}
+	#stepsDetails{
+/* overflow-y: scroll; */
+/*     height: 400px; */
+/*     padding-bottom: 150px; */
+    }
+@media screen and (max-width: 1200px) and (min-width: 700px) { 
+    .palette_node_element {
+    float: left;
+    width: 48%;
+    margin: 1px 1%;
+}
+/*    #TestDivTheory{ 
+/*     height:700px; padding-bottom:300px; overflow-y:scroll}  */
+/*   #discriptionDiv p { */
+/* 	font-size: 15px; */
+	
+/* } */
+/* #questionDiv{height:700px;overflow:scroll;padding-bottom:220px;} */
+/* #library { */
+/* 	border: 2px solid #333; */
+/*     /* height: 1074px; */ */
+/*     overflow: scroll; */
+/*     padding-bottom: 221px; */
+/* } */
+
+ #appName{font-size: 15px;}
+#identify, #reset, #next {
+   
+    font-size: 15px;
+    padding:5px;
+}
+#questionDiv .queno {
+    font-size: 18px;
+}
+#questionDiv .queTitle{ font-size: 15px;}
+#terminologiesDiv, #testSubmit, #nextLevel, #LCnextLevel, #TCnextLevel, #PCnextLevel, #FCnextLevel, #LC_LTcheckConfig, #LC_LTwiringDiagram, #PC_PTcheckConfig
+{font-size: 15px; padding:5px;}
+
+#LC_characterisationDIv {
+   
+    padding: 10px 10px 20px 10px;
+}
+#FC_characterisationDIv {
+    
+    padding: 10px 10px 20px 10px;
+}
+#PC_characterisationDIv {
+  
+    padding: 10px 10px 20px 10px;
+}
+#TC_characterisationDIv {
+    padding: 10px 10px 20px 10px;
+}
+#TestNextDiv{padding: 10px 10px 20px 10px;}
+}	
+
+	</style>
+<!--<script type="text/javascript">
+
+/**
+ * @method
+ * Factory method to provide a default connection for all drag&drop connections. You
+ * can override this method and customize this for your personal purpose.
+ *
+ * @param {draw2d.Port} sourcePort port of the source of the connection
+ * @param {draw2d.Port} targetPort port of the target of the connection
+ * @template
+ * @returns {draw2d.Connection}
+ */
+
+document.addEventListener("DOMContentLoaded",function () {
+
+    var routerToUse =new draw2d.layout.connection.InteractiveManhattanConnectionRouter();
+    var app  = new example.Application();
+    app.view.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
+        createConnection: function(){
+            var connection = new draw2d.Connection({
+                stroke:3,
+                outlineStroke:1,
+                outlineColor:"#303030",
+                color:"91B93E",
+                router:routerToUse
+            });
+            return connection;
+        }
+    }));
+
+
+	
+	
+	
+	
+    // unmarshal the JSON document into the canvas
+    // (load)
+//     var reader = new draw2d.io.json.Reader();
+//     reader.unmarshal(app.view, jsonDocument);
+
+});
+
+$(window).load(function () {
+window.scrollTo(0);
+     var app  = new example.Application();
+    
+});
+
+
+
+
+
+
+</script>-->
+<!-- JavaScript -->
+<script src="js/onlineAssert/alertify.min.js"></script>
+
+	<script src="js/app/Application.js"></script>
+    <script src="js/app/View.js"></script>
+    <script src="js/app/Toolbar.js"></script>
+    <script src="js/app/TableShape.js"></script>
+	
+	<script src="js/src/diagrams/LevelControl.js"></script>
+	<script src="js/src/diagrams/TempControl.js"></script>
+	<script src="js/src/diagrams/PressureControl.js"></script>
+	<script src="js/src/diagrams/FlowControl.js"></script>
+	<script src="js/src/Calculation.js"></script>
+	
+	
+	
+	<script src="js/discription/discription.js"></script>
+	
+	
+	<script src="js/json/LC_QuestionJson.js"></script>
+	<script src="js/json/TC_QuestionJson.js"></script>
+	<script src="js/json/PC_QuestionJson.js"></script>
+	<script src="js/json/FC_QuestionJson.js"></script>
+	
+	
+	<script src="js/test/LC_Questions.js"></script>
+	<script src="js/test/TC_Questions.js"></script>
+	<script src="js/test/PC_Questions.js"></script>
+	<script src="js/test/FC_Questions.js"></script>
+	
+	
+	<script src="js/config/LC_Configuration.js"></script>
+	<script src="js/config/TC_Configuration.js"></script>
+	<script src="js/config/PC_Configuration.js"></script>
+	<script src="js/config/FC_Configuration.js"></script>
+	
+	<script src="js/characterisation/LC_Characterisation.js"></script>
+	<script src="js/characterisation/TC_Characterisation.js"></script>
+	<script src="js/characterisation/PC_Characterisation.js"></script>
+	<script src="js/characterisation/FC_Characterisation.js"></script>
+	
+	<script src="js/characterisation/formulaJson/LC_characterisationArr.js"></script>
+	<script src="js/characterisation/formulaJson/TC_characterisationArr.js"></script>
+	<script src="js/characterisation/formulaJson/PC_characterisationArr.js"></script>
+	<script src="js/characterisation/formulaJson/FC_characterisationArr.js"></script>
+	
+	<script src="js/characterisation/animationDiagrams/anim_LevelControl.js"></script>
+	<script src="js/characterisation/animationDiagrams/anim_TempControl.js"></script>
+	<script src="js/characterisation/animationDiagrams/anim_PressureControl.js"></script>
+	<script src="js/characterisation/animationDiagrams/anim_FlowControl.js"></script>
+
+    <script src="js/calibration/LC_Calibration.js"></script>
+    <script src="js/calibration/PC_Calibration.js"></script>
+    <script src="js/calibration/FC_Calibration.js"></script>
+    <script src="js/calibration/TC_Calibration.js"></script>
+	
+	<script src="js/FaultCreation/LC_FaultCreation.js"></script>
+	<script src="js/FaultCreation/TC_FaultCreation.js"></script>
+	<script src="js/FaultCreation/PC_FaultCreation.js"></script>
+	<script src="js/FaultCreation/FC_FaultCreation.js"></script>
+	
+	<script src="js/FaultCreation/LC_Analysis.js"></script>
+	<script src="js/FaultCreation/TC_Analysis.js"></script>
+	<script src="js/FaultCreation/PC_Analysis.js"></script>
+	<script src="js/FaultCreation/FC_Analysis.js"></script>
+	
+	<script src="js/src/Application.js"></script> 
+	<script src="js/src/View.js"></script> 
+	<script src="js/src/Toolbar.js"></script>
+	<script src="js/src/HoverConnection.js"></script>	
+	<script src="js/src/SymbolLiabrary.js"></script>
+    <script src="js/src/symbols/LTSymbols.js"></script> 
+	<script src="js/src/symbols/TTSymbols.js"></script> 
+	<script src="js/src/symbols/PTSymbols.js"></script>
+	<script src="js/src/symbols/FTSymbols.js"></script>
+	<script src="js/src/symbols/I2PSymbols.js"></script>
+	<script src="js/src/symbols/commonSymbols.js"></script>
+	
+	<script src="js/src/symbols/PneumaticTransSymbols.js"></script>
+	<script src="js/src/symbols/P2ESymbols.js"></script>
+	
+	
+	<script src="js/connections/CheckConnectionForTrans.js"></script> 	
+	
+	<script src="js/connections/LT/twoWireConnForLT.js"></script> 
+	<script src="js/connections/LT/threeWireConnForLT.js"></script> 
+	<script src="js/connections/LT/fourWireConnForLT.js"></script> 
+	<script src="js/connections/LT/hartConnForLT.js"></script> 
+	<script src="js/connections/LT/fftransConnForLT.js"></script> 
+	
+	<script src="js/connections/TT/twoWireConnForTT.js"></script> 
+	<script src="js/connections/TT/threeWireConnForTT.js"></script> 
+	<script src="js/connections/TT/fourWireConnForTT.js"></script>
+	<script src="js/connections/TT/hartConnForTT.js"></script> 
+	<script src="js/connections/TT/fftransConnForTT.js"></script> 
+	
+	<script src="js/connections/PT/twoWireConnForPT.js"></script> 
+	<script src="js/connections/PT/threeWireConnForPT.js"></script> 
+	<script src="js/connections/PT/fourWireConnForPT.js"></script>
+	<script src="js/connections/PT/hartConnForPT.js"></script> 
+	<script src="js/connections/PT/fftransConnForPT.js"></script> 
+	
+	<script src="js/connections/FT/twoWireConnForFT.js"></script> 
+	<script src="js/connections/FT/threeWireConnForFT.js"></script> 
+	<script src="js/connections/FT/fourWireConnForFT.js"></script>
+	<script src="js/connections/FT/hartConnForFT.js"></script> 
+	<script src="js/connections/FT/fftransConnForFT.js"></script> 
+	
+	<script src="js/connections/Connhint.js"></script>
+<!-- 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
+     <script type="text/javascript" src="js/lib/canvasjs.min.js"></script>
+  
+<!--    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> -->
+<!-- <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script> -->
+<!-- <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> -->
+<!-- <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script> -->
+<!-- <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>  -->
+<script src="js/onlineAssert/jquery.dataTables.min.js"></script>
+<script src="js/onlineAssert/dataTables.bootstrap.min.js"></script>
+<script src="js/onlineAssert/dataTables.buttons.min.js"></script>
+<script src="js/onlineAssert/buttons.bootstrap.min.js"></script>
+<script src="js/onlineAssert/jszip.min.js"></script>
+<script src="js/onlineAssert/pdfmake.min.js"></script>
+<script src="js/onlineAssert/vfs_fonts.js"></script>
+<script src="js/onlineAssert/buttons.html5.min.js"></script>
+<script src="js/onlineAssert/buttons.print.min.js"></script>
+
+
+
+
+<script>
+$("#Reqtimer").css("display","inline");
+   var type = "twowire";
+ //     var type = "threewire";
+ //  var type = "fourwire";	
+//    var type = "hart" 
+ //    var type = "fftrans" 
+</script>	
+
+	
+	 
+	 
+</head>
+
+
+
+<body id="container" >
+<header>
+		<img src='images/COEPlogo.png' />
+		<h1>COLLEGE OF ENGINEERING, PUNE</h1>
+		<h2 id="appName"><i>Configure a Transmitter for a particular process application</i>
+		</h2>
+</header>
+<div id="Reqtimer" class="col-md-12 col-sm-12"><i><label id="minutes">00</label><span>:</span><label id="seconds">00</label></i></div>
+
+<!--    <div id="toolbar" class="navbar-default"> -->
+<!--    </div> -->
+
+ <!--  <div id="side-nav" >
+     <span id="logo">Library</span>
+     <div id="layer_elements"></div>
+     <div id="layer_header" class="highlight panetitle blackgradient">
+            <div data-shape="TableShape"   class="palette_node_element draw2d_droppable" title="drag&amp;drop the table into the canvas..">Table</div>
+     </div>
+   </div>-->
+   <!--  <a href="javascript:SINGLEACTINGCYLINDER.connectionLevel(1, type)">check connections</a><br/>-->
+<!-- 	<a href="javascript:SINGLEACTINGCYLINDER.LC_Characterisation(1, type, null)">LC Characterisation</a><br/> -->
+<!-- 	 <a href="javascript:SINGLEACTINGCYLINDER.TC_Characterisation(2, type, null)">TC Characterisation</a><br/> -->
+<!-- 	 <a href="javascript:SINGLEACTINGCYLINDER.PC_Characterisation(3, type, null)">PC Characterisation</a><br/> -->
+<!-- 	 <a href="javascript:SINGLEACTINGCYLINDER.FC_Characterisation(4, type, null)">FC Characterisation</a><br/> -->
+   <div id = "mainDiv" class="container-fluid">
+   <div class="row">
+   					<div class="col-md-8 col-md-offset-2 col-xl-6 col-xl-offset-3 levelsApp">
+							<label class="control-label col-sm-2" for="levels">Select Application</label>
+							 <div class="col-sm-10">
+							<select class="form-control" name="App" id="levels" >
+										<!-- 	<option value="-1">Select</option>
+										<option value="0">Level Control</option>
+										<option value="1">Temperature Control</option>
+										<option value="2">Pressure Control</option>
+										<option value="3">Flow Control</option>-->
+									</select>
+							</div>
+							<div id="tramsTInst">
+							<i>
+							<p>In any process industry transmitters, I/P converters, Controllers, and Control valves are termed as "Process Loop Components. While using these components certain steps are required to be carried out. These steps are termed as  "Connection/Configuration", "Characterisation", "Calibration", and "fault finding". In each phase the user is supposed to carry out certain tasks as per industry standard. The main unit processes which are predominantly used in industries are Temperature, Level, Pressure, and Flow control System. As per the requirement the you can select the process and follow the steps as described in the "Procedure" section. The details of each step are as follows:</p>
+							<ol id="stepsDetails">
+							
+							<li><span>Configure a Transmitter:</span> To configure a transmitter you need to select span and from span select the range of the transmitter and type of the transmitter</li>
+							<li><span>Connection/wiring diagram:</span> From the standard library select the components required for the connection like a power supply, transmitter module, and an analog input card. Connect them as per standard connection diagram mentioned in theory.</li>
+							<li> <span>Characterisation:</span> Once the configuration and wiring diagram is complete change the process variable and observe the output of the transmitter. Ensure that you have exposed transmitter to full span as far as possible take maximum readings.</li>
+							<li><span>Calibration:</span> After scrutinising the readings calculate various parameters and calibrate the transmitter by adjusting "Zero, Span, and Linearity"</li>
+				            <li><span>Fault finding:</span> In this phase a fault is introduced and the user needs to identify the fault based on the readings of the transmitter.</li>
+				  			</ol></i>
+				  			</div>
+				  </div>
+		   <div class="col-md-6 col-sm-12" id="canvasMainDiv">
+				
+				<div class="col-md-12 col-sm-12" style=""><div id="canvas" ></div></div>
+			</div>	
+			 <div class="col-md-6 col-sm-12">
+				<div id = "TestDiv" >
+			
+				</div>
+				
+				</div>
+				
+		   
+				</div>
+				
+				</div>
+		</div>
+   </div>
+   
+   
+   
+   <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Diagram</h4>
+      </div>
+      <div class="modal-body">
+	   <!-- LT Connection Hint Images-->
+        <img id= "LT2Wire" src="images/ConnImg/2wireTranLT100.jpg" style="width:100%; height:300px; display:none">
+		<img id= "LT3Wire" src="images/ConnImg/3wireTranLT100.jpg" style="width:100%; height:300px; display:none">
+		<img id= "LT4Wire" src="images/ConnImg/4wireTranLT100.jpg" style="width:100%; height:300px; display:none">
+		<img id= "LTHart" src="images/ConnImg/configurator_heartLT.jpg" style="width:100%; height:300px; display:none">
+		<img id= "LT_FFt" src="images/ConnImg/FFT_LT100.jpg" style="width:100%; height:300px; display:none">
+		
+		 <!-- TT Connection Hint Images-->
+        <img id= "TT2Wire" src="images/ConnImg/2wireTranTT100.jpg" style="width:100%; height:300px; display:none">
+		<img id= "TT3Wire" src="images/ConnImg/3wireTranTT100.jpg" style="width:100%; height:300px; display:none">
+		<img id= "TT4Wire" src="images/ConnImg/4wireTranTT100.jpg" style="width:100%; height:300px; display:none">
+		<img id= "TTHart" src="images/ConnImg/configurator_heartTT.jpg" style="width:100%; height:300px; display:none">
+		<img id= "TT_FFt" src="images/ConnImg/FFT_TT100.jpg" style="width:100%; height:300px; display:none">
+		
+		 <!-- PT Connection Hint Images-->
+        <img id= "PT2Wire" src="images/ConnImg/2wireTranPT100.jpg" style="width:100%; height:300px; display:none">
+		<img id= "PT3Wire" src="images/ConnImg/3WireTranPT100.jpg" style="width:100%; height:300px; display:none">
+		<img id= "PT4Wire" src="images/ConnImg/4WireTranPT100.jpg" style="width:100%; height:300px; display:none">
+		<img id= "PTHart" src="images/ConnImg/configurator_heartPT.jpg" style="width:100%; height:300px; display:none">
+		<img id= "PT_FFt" src="images/ConnImg/FFT_PT100.jpg" style="width:100%; height:300px; display:none">
+		
+		<!-- FT Connection Hint Images-->
+        <img id= "FT2Wire" src="images/ConnImg/2wireTranFT100.jpg" style="width:100%; height:300px; display:none">
+		<img id= "FT3Wire" src="images/ConnImg/3WireTranFT100.jpg" style="width:100%; height:300px; display:none">
+		<img id= "FT4Wire" src="images/ConnImg/4wireTranFT100.jpg" style="width:100%; height:300px; display:none">
+		<img id= "FTHart" src="images/ConnImg/Configurator_hartFT.jpg" style="width:100%; height:300px; display:none">
+		<img id= "FT_FFt" src="images/ConnImg/FFT_FT100.jpg" style="width:100%; height:300px; display:none">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="calibrationmyModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Formulas for calibration</h4>
+				</div>
+				<div class="modal-body">
+					<div id="zero4direct" style="display: none">
+						<p>Zero Error Formula</p>
+						<div class="formu">ZERO ERROR = output for lower span value
+							- 4</div>
+					</div>
+					<div id="span4direct" style="display: none">
+						<p>Span error Formula</p>
+						<div class="formu">SPAN ERROR = output for higher span
+							value - 20</div>
+					</div>
+					<div id="Accuracy4direct" style="display: none">
+						<p>Accuracy formula</p>
+						<div class="formu">PERCENTAGE ACCURACY = <div>(&nbsp;&nbsp;(&nbsp;standard output
+							- observed output&nbsp;) / total number of readings&nbsp;&nbsp;) * 100</div></div>
+						<p>Average Accuracy Formula</p>
+						<div class="formu">AVERAGE ACCURACY = <div>Sum of ( Percentage
+							Accuracy ) / Total no. of readings</div></div>
+					</div>
+					<div id="Linearity4direct" style="display: none">
+						<p>Linearity formula</p>
+
+
+				 <div class="formu">A = Sqrt(sum(x<sup>2</sup>) - (sum(x))<sup>2</sup>/N)</div>
+						     <div class="formu">B = Sqrt(sum(y<sup>2</sup>) - (sum(y))<sup>2</sup>/N)</div> 
+						     <div class="formu">C = sum(xy) - (sum(x).sum(y))/N</div>
+						     <div class="formu">Linearity = C/AB</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+<script>
+//$("#Reqtimer").css("display","inline");
+</script>
+
+<script src="../assets/js/iframeResize.js"></script></body>
+</html>
