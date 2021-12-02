@@ -14,15 +14,15 @@ var width = $(window).width();
 	paper.setSize('100%', 500);
   }else
   {
-      paper = new Raphael(document.getElementById('canvas'), '100%', 700);
+      paper = new Raphael(document.getElementById('canvas'), '100%', 800);
 	paper.setViewBox(0,0,w,h,true);
-	paper.setSize('100%', 700);
+	paper.setSize('100%', 800);
   }
     //x = 310;
 	//y = 160;
 	
 	x = 200;
-	y = 300;
+	y = 200;
 
 	
 	 var TL_tank1 = TL_Tank1 (x, y);

@@ -65,6 +65,9 @@
 			+'<div >'
 
 	$(mainDiv).html(TC_characterisation);
+	
+	stop_timer();
+	set_timer();
 
 	var slider = document.getElementById("TC_tankLvl");
 	var output = document.getElementById("demo");
@@ -82,7 +85,8 @@
 						var waterlevel = slider.value;
 
 						if ($.inArray(parseFloat(waterlevel), TColdreading) >= 0) {
-							alertify.alert('This Value Reading is already Present. /n Please Select Another Value For Reading');
+							alertify.alert("Alert",'This Value Reading is already Present.  Please Select Another Value For Reading');
+							$(".ajs-header").css("background-color","#ce6058");
 						} else {
 							$("#TC_graph").prop("hidden", false);
 							var trueReading = ((waterlevel - lowerSpLevel) * 100)
@@ -163,7 +167,7 @@
 										// +'</tr><tr><td>'+(readingcnt+1)+'</td><td>'+waterlevel+'</td><td>'+actualVal+'</td></tr>'
 										// +'</table>'
 										+ '</div>'
-										+ '<div id="TC_chartContainer" class="col-md-12"style="height: 400px; width: 90%; padding:0 5%"></div>'
+										+ '<div id="TC_chartContainer" class="col-md-12"style="height: 400px; width: 90%; padding:0 5%" hidden></div>'
 										// +'<div id = "TCgraphContainer" >'
 										+ '</div>';
 
@@ -226,12 +230,14 @@
 
 						if (readingcnt < numofReading) {
 
-							alertify.alert("Please take at least " + numofReading
+							alertify.alert("Alert","Please take at least " + numofReading
 									+ " readings");
+							$(".ajs-header").css("background-color","#ce6058");
 						}
-
+						
 						if (readingcnt >= numofReading) {
-							
+							$("#TC_chartContainer").prop("hidden", false);	
+							window.scrollTo(0,$('#TC_characterisationDIv').height());
 //							TColdreadingForGraph.push(parseFloat(waterlevel));
 							TColdreadingForGraph.sort(function(a, b) {
 								return a - b
@@ -249,74 +255,77 @@
 								OldValue.push(olValueJson);
 							}
 							// console.log(OldValue);
-							var chart = new CanvasJS.Chart("TC_chartContainer",
-									{
-										animationEnabled : true,
-										theme : "light2",
-										title : {
-											text : "Temperature  Control System",
-											fontSize : 20,
-										},
-
-										axisX : {
-											title : "output",
-											crosshair : {
-												enabled : true,
-												snapToDataPoint : true
-											},
-										// ticks: {suggestedMin: 2, max:6}
-										},
-										axisY : {
-											title : "input",
-											minimum : 3,
-											maximum : 21
-										},
-
-										toolTip : {
-											shared : true
-										},
-										legend : {
-											cursor : "pointer",
-											verticalAlign : "bottom",
-											horizontalAlign : "right",
-											dockInsidePlotArea : true,
-											itemclick : toogleDataSeries
-										},
-										data : [ {
-											type : "scatter",
-											showInLegend : true,
-											name : "Observed Output",
-											markerType : "circle",
-											// xValueFormatString: "DD MMM,
-											// YYYY",
-											color : "#F08080",
-
-											dataPoints : OldValue
-										}, {
-											type : "line",
-											showInLegend : true,
-											name : "Standard Output",
-											// lineDashType: "dash",
-											dataPoints : [ {
-												x : lowerSpLevel,
-												y : 4
-											}, {
-												x : higherSpLevel,
-												y : 20
-											} ]
-										} ]
-									});
-							chart.render();
-
-							function toogleDataSeries(e) {
-								if (typeof (e.dataSeries.visible) === "undefined"
-										|| e.dataSeries.visible) {
-									e.dataSeries.visible = false;
-								} else {
-									e.dataSeries.visible = true;
-								}
-								chart.render();
-							}
+							 TCDrowGraph();
+							 TC_Updategraph(OldValue,lowerSpLevel, higherSpLevel);
+//							var chart = new CanvasJS.Chart("TC_chartContainer",
+//									{
+//										animationEnabled : true,
+//										theme : "light2",
+//										title : {
+//											text : "Temperature  Control System",
+//											fontSize : 20,
+//										},
+//
+//										axisX : {
+//											title : "Input flow (lph)",
+//											crosshair : {
+//												enabled : true,
+//												snapToDataPoint : true
+//											},
+//										// ticks: {suggestedMin: 2, max:6}
+//										},
+//										axisY : {
+//											title : "Output (mA)",
+//											minimum : 2,
+//											maximum : 21,
+//											interval: 1
+//										},
+//
+//										toolTip : {
+//											shared : true
+//										},
+//										legend : {
+//											cursor : "pointer",
+//											verticalAlign : "bottom",
+//											horizontalAlign : "right",
+//											dockInsidePlotArea : true,
+//											itemclick : toogleDataSeries
+//										},
+//										data : [ {
+//											type : "scatter",
+//											showInLegend : true,
+//											name : "Observed Output",
+//											markerType : "circle",
+//											// xValueFormatString: "DD MMM,
+//											// YYYY",
+//											color : "#F08080",
+//
+//											dataPoints : OldValue
+//										}, {
+//											type : "line",
+//											showInLegend : true,
+//											name : "Standard Output",
+//											// lineDashType: "dash",
+//											dataPoints : [ {
+//												x : lowerSpLevel,
+//												y : 4
+//											}, {
+//												x : higherSpLevel,
+//												y : 20
+//											} ]
+//										} ]
+//									});
+//							chart.render();
+//
+//							function toogleDataSeries(e) {
+//								if (typeof (e.dataSeries.visible) === "undefined"
+//										|| e.dataSeries.visible) {
+//									e.dataSeries.visible = false;
+//								} else {
+//									e.dataSeries.visible = true;
+//								}
+//								chart.render();
+//							}
 							$("#TC_calibration").prop("hidden", false);
 						}
 
@@ -331,14 +340,16 @@
 
 		if(TColdreadingForGraph.indexOf(lowerSpLevel) == -1){
 			
-			alertify.alert("Please Select Lower Span Value And Plot The Graph Again");
+			alertify.alert("Alert","Please Select Lower Span Value And Plot The Graph Again");
+			$(".ajs-header").css("background-color","#ce6058");
 			$("#TC_calibration").prop("hidden", true);
 			$("#TC_graph").prop("hidden", true);			
 			$("#TC_chartContainer").html('');
 			
 		}else if(TColdreadingForGraph.indexOf(higherSpLevel) == -1){
 			
-			alertify.alert("Please Select Higher Span Value And Plot The Graph Again");
+			alertify.alert("Alert","Please Select Higher Span Value And Plot The Graph Again");
+			$(".ajs-header").css("background-color","#ce6058");
 			$("#TC_calibration").prop("hidden", true);
 			$("#TC_graph").prop("hidden", true);	
 			$("#TC_chartContainer").html('');
@@ -346,9 +357,16 @@
 			
 		}else{
 			
+			minutes = document.getElementById("minutes").textContent;
+    		seconds = document.getElementById("seconds").textContent;        		
+//    		console.log(minutes+":"+seconds);
+			
 			TC_CharacterisationData.tcreading = TColdreading;
 			TC_CharacterisationData.tcactualVal = TCarr_actualVal;
 			TC_CharacterisationData.tcstdVal = TCarr_stdVal;
+			
+			TC_CharacterisationData.CharacTimeInMin = minutes;
+			TC_CharacterisationData.CharacTimeInSec = seconds;
 			
 //			console.log(TC_CharacterisationData);
 			
@@ -357,6 +375,8 @@
 			ExpTrackData.tcCharactData = TC_CharacterisationData;
 			
 //			console.log(ExpTrackData);
+			
+			stop_timer();
 			
 			TC_calibrationFun(lowerSpLevel, higherSpLevel, TColdreading, TCarr_actualVal, TCarr_stdVal);
 			
@@ -372,6 +392,6 @@
 	anim_TempControl(lowerSpLevel, higherSpLevel);
 
 }
-
+ 
  });
 

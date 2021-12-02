@@ -107,6 +107,9 @@ PC_ConfigureLT = function(appId){
 		        +'</div>'; // container close
 			
 			$("#TestDiv").html(configure);
+			
+			stop_timer();
+			set_timer();
 		
 		//animLT.repeat(0);
 		PTCircle.attr({'fill':'green'});
@@ -163,24 +166,36 @@ PC_ConfigureLT = function(appId){
 						
 						if((selectedType == "twowire" && output == "0")|| (selectedType == "threewire" && output == "0")|| (selectedType == "fourwire" && output == "0")){
 							
-						   alertify.alert("Configuration is successful. Please click next level to do Electrical Wiring Connections of transmitter");
+						   alertify.alert('Success!!',"Configuration is successful. Please click next level to proceed for  wiring of transmitter");
+						   $(".ajs-header").css("background-color","#4CAF50");
+
 						   $("#PC_PTwiringDiagram").prop("hidden", false);
 						   $("#trsmtrType, #PC_spanLevel, #PC_Range, #output").prop("disabled", true);				   
 							
 						}else if(selectedType == "hart" && output == "1"){
 							
-							alertify.alert("Configuration is successful.  Please click next level to do Electrical Wiring Connections of transmitter");
+							alertify.alert('Success!!',"Configuration is successful. Please click next level to proceed for  wiring of transmitter");
+							$(".ajs-header").css("background-color","#4CAF50");
+
 						   $("#PC_PTwiringDiagram").prop("hidden", false);
 						   $("#trsmtrType, #PC_spanLevel, #PC_Range, #output").prop("disabled", true);
 						}else if(selectedType == "fftrans" && output == "2"){
 							
-							alertify.alert("Configuration is successful.  Please click next level to do Electrical Wiring Connections of transmitter");
+							alertify.alert('Success!!',"Configuration is successful. Please click next level to proceed for  wiring of transmitter");
+							$(".ajs-header").css("background-color","#4CAF50");
+
 						   $("#PC_PTwiringDiagram").prop("hidden", false);
 						   $("#trsmtrType, #PC_spanLevel, #PC_Range, #output").prop("disabled", true);
 						}else{
 							
-							alertify.alert("Please Select The Correct Output As Per Selected Transmitter Type");
+							alertify.alert('Alert',"Please Select The Correct Output As Per Selected Transmitter Type");
+							$(".ajs-header").css("background-color","#ce6058");
 						}
+						
+						minutes = document.getElementById("minutes").textContent;
+		        		seconds = document.getElementById("seconds").textContent;        		
+//		        		console.log(minutes+":"+seconds);
+						
 						
 						PC_configData.appId = appId;
 						PC_configData.trsmtrTpye = selectedType;
@@ -190,6 +205,9 @@ PC_ConfigureLT = function(appId){
 						PC_configData.configcnt = PC_ConfigFlagCnt;
 						PC_configData.lowerSpanLevel= lowerSpanLevel;
 						PC_configData.higherSpanLevel= higherSpanLevel;
+						PC_configData.configTimeInMin = minutes;
+						PC_configData.configTimeInSec = seconds;
+						
 						
 					//	console.log(PC_configData);
 						PC_appData.pcConfigData = PC_configData;
@@ -197,14 +215,19 @@ PC_ConfigureLT = function(appId){
 						ExpTrackData.pcAppData = PC_appData
 //						console.log(ExpTrackData);
 						$("#errRange" ).css("display","none");
+						
+						
+						stop_timer();
 					}else{
 						
 						if(PC_ConfigFlagCnt == 3){
 							$("#errRange" ).css("display","none");
-							alertify.alert("Range is incorrect \n Correct Range is: " +range.toFixed(2));						
+							alertify.alert('Alert',"Range is incorrect \n Correct Range is: " +range.toFixed(2));	
+							$(".ajs-header").css("background-color","#ce6058");
 						}else{
 							$("#errRange" ).css("display","none");
-							alertify.alert("Range is incorrect");
+							alertify.alert('Alert',"Range is incorrect");
+							$(".ajs-header").css("background-color","#ce6058");
 							PC_ConfigFlagCnt++;
 						}
 		
@@ -219,7 +242,8 @@ PC_ConfigureLT = function(appId){
 						
 					}else{
 						
-						alertify.alert("Please Select All The Fields");
+						alertify.alert('Alert',"Please Select All The Fields");
+						$(".ajs-header").css("background-color","#ce6058");
 						
 					}
 					

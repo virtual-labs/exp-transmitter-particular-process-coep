@@ -12,7 +12,7 @@ $(function () {
 
 //	 var lowerSpLevel = 2;
 //	 var higherSpLevel = 6;
-
+//
 	 var lowerSpLevel = ExpTrackData.lcAppData.lcConfigData.lowerSpanLevel;
 	 var higherSpLevel = ExpTrackData.lcAppData.lcConfigData.higherSpanLevel;
 
@@ -47,6 +47,7 @@ $(function () {
 			+ '<div id = "TestDiv" >'
 			+'<h1>LT Characterisation</h1>'
 			+'<h6>In this level characterize the LT 100</h6>'
+			//+'<div id="Reqtimer" class="col-md-12 col-sm-12"><i><label id="minutes">00</label><span>:</span><label id="seconds">00</label></i></div>'
 			+ '<div class="slidecontainer" id="LC_Slider">'
 			+ '<div class="header">Tank level (span  '
 			+ lowerSpLevel
@@ -71,6 +72,10 @@ $(function () {
 			+'<div >'
 
 	$(mainDiv).html(LC_characterisation);
+	
+	stop_timer();
+	set_timer();
+	
 
 	var slider = document.getElementById("LC_tankLvl");
 	var output = document.getElementById("demo");
@@ -89,7 +94,8 @@ $(function () {
 						
 						
 						if ($.inArray(parseFloat(waterlevel), LColdreading) >= 0) {
-							alertify.alert('This Value Reading is already Present. /n Please Select Another Value For Reading');
+							alertify.alert("Alert",'This Value Reading is already Present.  Please Select Another Value For Reading');
+							$(".ajs-header").css("background-color","#ce6058");
 						} else {
 							$("#LC_graph").prop("hidden", false);
 							var trueReading = ((waterlevel - lowerSpLevel) * 100)
@@ -173,7 +179,7 @@ $(function () {
 
 										+ '</table>'
 										+ '</div>'
-										+ '<div id="LC_chartContainer" class="col-md-12"style="height: 400px; width: 90%; padding:0 5%"></div></div>'
+										+ '<div id="LC_chartContainer" class="col-md-12"style="height: 400px; width: 90%; padding:0 5%" hidden></div></div>'
 
 								readingcnt++;
 
@@ -227,14 +233,15 @@ $(function () {
 
 						if (readingcnt < numofReading) {
 
-							alertify.alert("Please Take At Least " + numofReading
-									+ " Readings");
+							alertify.alert("Alert","Please take at least " + numofReading
+									+ " readings");
+							$(".ajs-header").css("background-color","#ce6058");
 						}
-
 						
 						
 						if (readingcnt >= numofReading) {
-							
+							$("#LC_chartContainer").prop("hidden", false);	
+							window.scrollTo(0,$('#LC_characterisationDIv').height());
 					//		LColdreadingForGraph.push(parseFloat(waterlevel));
 							LColdreadingForGraph.sort(function(a, b) {
 								return a - b
@@ -247,81 +254,15 @@ $(function () {
 									x : LColdreadingForGraph[j],
 									y : LCarr_actualVal[LColdreading.indexOf(LColdreadingForGraph[j])],
 									markerType : "circle",
-									markerSize : 10
+									markerSize : 8
 
 								};
 								OldValue.push(olValueJson);
 							}
-							// console.log(OldValue);
-							var chart = new CanvasJS.Chart("LC_chartContainer",
-									{
-										animationEnabled : true,
-										theme : "light2",
-										title : {
-											text : "Level Control System",
-											fontSize : 20,
-										},
-
-										axisX : {
-											title : "output",
-											crosshair : {
-												enabled : true,
-												snapToDataPoint : true
-											},
-										// ticks: {suggestedMin: 2, max:6}
-										},
-										axisY : {
-											title : "input",
-											minimum : 3,
-											maximum : 21
-										},
-
-										toolTip : {
-											shared : true
-										},
-										legend : {
-											cursor : "pointer",
-											verticalAlign : "bottom",
-											horizontalAlign : "right",
-											dockInsidePlotArea : true,
-											itemclick : toogleDataSeries
-										},
-										data : [ {
-											type : "scatter",
-											showInLegend : true,
-											name : "Observed Output",
-											markerType : "circle",
-											// xValueFormatString: "DD MMM,
-											// YYYY",
-											color : "#F08080",
-
-											dataPoints : OldValue
-										}, {
-											type : "line",
-											showInLegend : true,
-											name : "Standard Output",
-											// lineDashType: "dash",
-											dataPoints : [ {
-												x : lowerSpLevel,
-												y : 4
-											}, {
-												x : higherSpLevel,
-												y : 20
-											} ]
-										} ]
-									});
-							chart.render();
-
-							function toogleDataSeries(e) {
-								if (typeof (e.dataSeries.visible) === "undefined"
-										|| e.dataSeries.visible) {
-									e.dataSeries.visible = false;
-								} else {
-									e.dataSeries.visible = true;
-								}
-								chart.render();
-							}
-							 $("#LC_calibration").prop("hidden", false);
+//							 console.log(OldValue);
+							 LCDrowGraph();
+							 LC_Updategraph(OldValue,lowerSpLevel, higherSpLevel);
+													 $("#LC_calibration").prop("hidden", false);
 							 						}
 
 						
@@ -334,18 +275,22 @@ $(function () {
 
 					});
 
+	
+	
 	$('#LC_calibration').on('click', function() {
 
 		if(LColdreadingForGraph.indexOf(lowerSpLevel) == -1){
 			
-			alertify.alert("Please Select Lower Span Value And Plot The Graph Again");
+			alertify.alert("Alert","Please Select Lower Span Value And Plot The Graph Again");
+			$(".ajs-header").css("background-color","#ce6058");
 			$("#LC_calibration").prop("hidden", true);
 			$("#LC_graph").prop("hidden", true);			
 			$("#LC_chartContainer").html('');
 			
 		}else if(LColdreadingForGraph.indexOf(higherSpLevel) == -1){
 			
-			alertify.alert("Please Select Higher Span Value And Plot The Graph Again");
+			alertify.alert("Alert","Please Select Higher Span Value And Plot The Graph Again");
+			$(".ajs-header").css("background-color","#ce6058");
 			$("#LC_calibration").prop("hidden", true);
 			$("#LC_graph").prop("hidden", true);	
 			$("#LC_chartContainer").html('');
@@ -353,9 +298,18 @@ $(function () {
 			
 		}else{
 			
+			
+			minutes = document.getElementById("minutes").textContent;
+    		seconds = document.getElementById("seconds").textContent;        		
+//    		console.log(minutes+":"+seconds);
+    		
+			
 			LC_CharacterisationData.LCreading = LColdreading;
 			LC_CharacterisationData.LCactualVal = LCarr_actualVal;
 			LC_CharacterisationData.LCstdVal = LCarr_stdVal;
+			
+			LC_CharacterisationData.CharacTimeInMin = minutes;
+			LC_CharacterisationData.CharacTimeInSec = seconds;
 			
 //			console.log(LC_CharacterisationData);
 			
@@ -364,6 +318,11 @@ $(function () {
 			ExpTrackData.lcCharactData = LC_CharacterisationData;
 			
 //			console.log(ExpTrackData);
+			
+			stop_timer();
+			
+//			$("#Reqtimer").prop("hidden", true);	
+			
 			
 			LC_calibrationFun(lowerSpLevel, higherSpLevel, LColdreading, LCarr_actualVal, LCarr_stdVal);
 			

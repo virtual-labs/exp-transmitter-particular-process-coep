@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <link href="css/homePage.css" rel="stylesheet"
+	type="text/css">
   <link type="text/css" rel="stylesheet" href="css/application.css" />
   <link type="text/css" rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/jquery-ui.css">
@@ -15,7 +17,11 @@
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link href="css/Transmitter.css" rel="stylesheet"
 	type="text/css">
-
+<link href="css/font-awesome.css" rel="stylesheet"
+	type="text/css">
+	
+<link href="css/Analysis.css" rel="stylesheet"
+	type="text/css">
 <link href="css/animate.css" rel="stylesheet" type="text/css">
 
 <link href="css/onlineAssert/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -43,153 +49,72 @@
   <script src="js/dist/draw2d.js"></script>
     
 	<style>
-	
-	
-	
-	
-	
-	.levelsApp{
-	padding:50px 20px;
-	}
-	.levelsApp label{color:#000;font-weight: bold;
-    font-size: 16px;}
-    .levelsApp select{font-size: 15px;
-    font-weight: bold;}
-	.AppField{
-	float:right;
-	}
-.fa-plus-square {
-	font-size: 46px;
-	color: green;
-	margin-left:-10px
+	.fa-plus-square {
+    font-size: 46px;
+    color: green;
+    margin-left: -10px;
 }
-
-.fa-minus-square {
-	font-size: 46px;
-	color: red;
-margin-left:-10px
-}
-
-	.draw2d_InputPort{
-	   fill:#F7F7F7;
-	   stroke:#d7d7d7;
-	}
-    .draw2d_OutputPort{
-       fill:#F7F7F7;
-       stroke:#d7d7d7;
-    }
-/* 	#TestDiv{overflow-x: scroll; */
-/*     overflow-y: scroll; ; width:100%; height:100%; padding:10px 0 200px 0; } */
-	
-	#connectionLevel h4 {
-    
-    font-size: 22px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #333;
-    margin: 5px 0;
-    border-radius: 10px;
-    padding: 10px 0;
-    font-family: Cambria, Georgia, serif;
-	}
-	#instructionDiv h4 {
-    font-size: 22px;
-    font-weight: bold;
-    color: #fff;
-    text-align:center;
-    background-color: #333;
-    margin: 5px 0;
-    border-radius: 10px;
-    padding: 10px 0;
-    font-family: Cambria, Georgia, serif;
-}
-
-#instructionDiv .infoInst{padding:40px 10px; color:#a92727; font-size:18px; font-weight: bold;}
-	#library{
-	border: 2px solid #333;
-    height: 1000px;
-    overflow: scroll;
-    padding-bottom: 100px;
-	}
-	#draw2Did{
-	border:2px solid #333;
-	height:1000px;
-	overflow-x: scroll
-	}
-	#draw2Did nav{
-	
-    font-weight: bold;
-    color: #fff;
-    background-color: #333;
-    margin: 5px 0;
-    border-radius: 10px;
-    padding: 10px 0;
-    font-family: Cambria, Georgia, serif;}
-	
-	#draw2Did a{
-	font-size:18px;
-	background:#666;
-	color:#fff;
-	margin:10px 20px;
-	padding:5px 5px;
-	}
-	#img1{float:left; width:90px; height:90px;}
-	
-	#discriptionDiv h4{font-size: 22px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #333;
-    margin: 5px 0;
-    border-radius: 10px;
-    padding: 10px 0;
-    font-family: Cambria, Georgia, serif;}
-	
-	#discriptionDiv p{font-size: 18px;
-    color: #333;
-   padding: 1px 10px;
-    font-family: Cambria, Georgia, serif;}
-	
-	#configDiv{
-/* 	 margin: 0 12%; */
-/*     width: 76%; */
-    }
-	
-	#configDiv  h4{font-size: 22px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #333;
-    margin: 5px 0;
-    border-radius: 10px;
-    padding: 10px 0;
-    font-family: Cambria, Georgia, serif;}
-    
-    #configDiv  h6{
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-    margin: 5px 0;
-    padding: 5px 0 10px 0;
-    border-bottom: 2px solid #333;
-    font-family: Cambria, Georgia, serif;
-}
-
-#configDiv span{color:#000;font-weight: bold;
-    font-size: 16px;}
-    #configDiv select{font-size: 15px;
-    font-weight: bold;}
-	
-	#configDiv .topmargin{ margin:10px 0}
-	
-	@media screen and (max-width:1200px ) and (min-width:300px)
-	{
 	.fa-minus-square {
 	font-size: 46px;
 	color: red;
 margin-left:-20px
 }
+	#stepsDetails{
+/* overflow-y: scroll; */
+/*     height: 400px; */
+/*     padding-bottom: 150px; */
+    }
+@media screen and (max-width: 1200px) and (min-width: 700px) { 
+    .palette_node_element {
+    float: left;
+    width: 48%;
+    margin: 1px 1%;
 }
+/*    #TestDivTheory{ 
+/*     height:700px; padding-bottom:300px; overflow-y:scroll}  */
+/*   #discriptionDiv p { */
+/* 	font-size: 15px; */
 	
+/* } */
+/* #questionDiv{height:700px;overflow:scroll;padding-bottom:220px;} */
+/* #library { */
+/* 	border: 2px solid #333; */
+/*     /* height: 1074px; */ */
+/*     overflow: scroll; */
+/*     padding-bottom: 221px; */
+/* } */
+
+ #appName{font-size: 15px;}
+#identify, #reset, #next {
+   
+    font-size: 15px;
+    padding:5px;
+}
+#questionDiv .queno {
+    font-size: 18px;
+}
+#questionDiv .queTitle{ font-size: 15px;}
+#terminologiesDiv, #testSubmit, #nextLevel, #LCnextLevel, #TCnextLevel, #PCnextLevel, #FCnextLevel, #LC_LTcheckConfig, #LC_LTwiringDiagram, #PC_PTcheckConfig
+{font-size: 15px; padding:5px;}
+
+#LC_characterisationDIv {
+   
+    padding: 10px 10px 20px 10px;
+}
+#FC_characterisationDIv {
+    
+    padding: 10px 10px 20px 10px;
+}
+#PC_characterisationDIv {
+  
+    padding: 10px 10px 20px 10px;
+}
+#TC_characterisationDIv {
+    padding: 10px 10px 20px 10px;
+}
+#TestNextDiv{padding: 10px 10px 20px 10px;}
+}	
+
 	</style>
 <!--<script type="text/javascript">
 
@@ -234,7 +159,7 @@ document.addEventListener("DOMContentLoaded",function () {
 });
 
 $(window).load(function () {
-
+window.scrollTo(0);
      var app  = new example.Application();
     
 });
@@ -247,9 +172,6 @@ $(window).load(function () {
 </script>-->
 <!-- JavaScript -->
 <script src="js/onlineAssert/alertify.min.js"></script>
-
-
-
 
 	<script src="js/app/Application.js"></script>
     <script src="js/app/View.js"></script>
@@ -309,6 +231,10 @@ $(window).load(function () {
 	<script src="js/FaultCreation/PC_FaultCreation.js"></script>
 	<script src="js/FaultCreation/FC_FaultCreation.js"></script>
 	
+	<script src="js/FaultCreation/LC_Analysis.js"></script>
+	<script src="js/FaultCreation/TC_Analysis.js"></script>
+	<script src="js/FaultCreation/PC_Analysis.js"></script>
+	<script src="js/FaultCreation/FC_Analysis.js"></script>
 	
 	<script src="js/src/Application.js"></script> 
 	<script src="js/src/View.js"></script> 
@@ -378,7 +304,7 @@ $(window).load(function () {
 
 
 <script>
-
+$("#Reqtimer").css("display","inline");
    var type = "twowire";
  //     var type = "threewire";
  //  var type = "fourwire";	
@@ -400,6 +326,8 @@ $(window).load(function () {
 		<h2 id="appName"><i>Configure a Transmitter for a particular process application</i>
 		</h2>
 </header>
+<div id="Reqtimer" class="col-md-12 col-sm-12"><i><label id="minutes">00</label><span>:</span><label id="seconds">00</label></i></div>
+
 <!--    <div id="toolbar" class="navbar-default"> -->
 <!--    </div> -->
 
@@ -411,10 +339,10 @@ $(window).load(function () {
      </div>
    </div>-->
    <!--  <a href="javascript:SINGLEACTINGCYLINDER.connectionLevel(1, type)">check connections</a><br/>-->
-	<!-- <a href="javascript:SINGLEACTINGCYLINDER.LC_Characterisation(1, type, null)">LC Characterisation</a><br/>-->
-	 <!-- <a href="javascript:SINGLEACTINGCYLINDER.TC_Characterisation(2, type, null)">TC Characterisation</a><br/>-->
-	 <!-- <a href="javascript:SINGLEACTINGCYLINDER.PC_Characterisation(3, type, null)">PC Characterisation</a><br/>-->
-	 <!-- <a href="javascript:SINGLEACTINGCYLINDER.FC_Characterisation(4, type, null)">FC Characterisation</a><br/>-->
+<!-- 	<a href="javascript:SINGLEACTINGCYLINDER.LC_Characterisation(1, type, null)">LC Characterisation</a><br/> -->
+<!-- 	 <a href="javascript:SINGLEACTINGCYLINDER.TC_Characterisation(2, type, null)">TC Characterisation</a><br/> -->
+<!-- 	 <a href="javascript:SINGLEACTINGCYLINDER.PC_Characterisation(3, type, null)">PC Characterisation</a><br/> -->
+<!-- 	 <a href="javascript:SINGLEACTINGCYLINDER.FC_Characterisation(4, type, null)">FC Characterisation</a><br/> -->
    <div id = "mainDiv" class="container-fluid">
    <div class="row">
    					<div class="col-md-8 col-md-offset-2 col-xl-6 col-xl-offset-3 levelsApp">
@@ -431,7 +359,7 @@ $(window).load(function () {
 							<div id="tramsTInst">
 							<i>
 							<p>In any process industry transmitters, I/P converters, Controllers, and Control valves are termed as "Process Loop Components. While using these components certain steps are required to be carried out. These steps are termed as  "Connection/Configuration", "Characterisation", "Calibration", and "fault finding". In each phase the user is supposed to carry out certain tasks as per industry standard. The main unit processes which are predominantly used in industries are Temperature, Level, Pressure, and Flow control System. As per the requirement the you can select the process and follow the steps as described in the "Procedure" section. The details of each step are as follows:</p>
-							<ol>
+							<ol id="stepsDetails">
 							
 							<li><span>Configure a Transmitter:</span> To configure a transmitter you need to select span and from span select the range of the transmitter and type of the transmitter</li>
 							<li><span>Connection/wiring diagram:</span> From the standard library select the components required for the connection like a power supply, transmitter module, and an analog input card. Connect them as per standard connection diagram mentioned in theory.</li>
@@ -441,15 +369,9 @@ $(window).load(function () {
 				  			</ol></i>
 				  			</div>
 				  </div>
-				  <div id="StartMain" style="display:none;">
 		   <div class="col-md-6 col-sm-12" id="canvasMainDiv">
-				<div class="col-md-12 col-sm-12">
 				
-							
-	
-				
-				</div>
-				<div class="col-md-12 col-sm-12" style="" ><div id="canvas" ></div></div>
+				<div class="col-md-12 col-sm-12" style=""><div id="canvas" ></div></div>
 			</div>	
 			 <div class="col-md-6 col-sm-12">
 				<div id = "TestDiv" >
@@ -457,7 +379,7 @@ $(window).load(function () {
 				</div>
 				
 				</div>
-				</div>
+				
 		   
 				</div>
 				
@@ -474,7 +396,7 @@ $(window).load(function () {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"></h4>
+        <h4 class="modal-title">Diagram</h4>
       </div>
       <div class="modal-body">
 	   <!-- LT Connection Hint Images-->
@@ -542,16 +464,12 @@ $(window).load(function () {
 					</div>
 					<div id="Linearity4direct" style="display: none">
 						<p>Linearity formula</p>
-						
-						<div>x : List of expected reading <br> y : List of reading obtained <br> N : No. of readings</div>
-						     <div class="formu">A = Sqrt((sum(x))<sup>2</sup>/N - sum(x<sup>2</sup>))</div>
-						     <div class="formu">B = Sqrt((sum(y))<sup>2</sup>/N - sum(y<sup>2</sup>))</div> 
-						     <div class="formu">C = (sum(x).sum(y))/N - sum(xy)</div>
-						     <div class="formu">Linearity = AB/C</div>
-						
-					</div>
 
-				
+
+				 <div class="formu">A = Sqrt(sum(x<sup>2</sup>) - (sum(x))<sup>2</sup>/N)</div>
+						     <div class="formu">B = Sqrt(sum(y<sup>2</sup>) - (sum(y))<sup>2</sup>/N)</div> 
+						     <div class="formu">C = sum(xy) - (sum(x).sum(y))/N</div>
+						     <div class="formu">Linearity = C/AB</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -562,7 +480,9 @@ $(window).load(function () {
 	</div>
 
 
-
+<script>
+//$("#Reqtimer").css("display","inline");
+</script>
 
 </body>
 </html>

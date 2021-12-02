@@ -94,6 +94,8 @@ example.Toolbar = Class.extend({
 //			console.log(jsonarray);
         	if(rightConn != 0 ){
         		
+        		stop_timer();
+        		
         		if(appId == "1"){
     				
         			//	transType = "twowire";
@@ -120,7 +122,7 @@ example.Toolbar = Class.extend({
         			}
         	}else{
         		
-        		alert("Wrong Connection. Please try again");
+        		alert("Wrong Connection. Please click Check Connection to verify");
         	}
 		
 			

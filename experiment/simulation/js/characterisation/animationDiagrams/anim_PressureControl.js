@@ -24,7 +24,7 @@ var width = $(window).width();
 	paper.setSize('100%', 700);
   }
 	x = 350;
-	y = 290;
+	y = 190;
 
 	
 	var PL_tank1 = PL_Tank1 ((x-35), y);

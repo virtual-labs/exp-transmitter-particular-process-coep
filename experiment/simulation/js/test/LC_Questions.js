@@ -10,6 +10,7 @@ showLC_Questions = function(appId){
 		
 		var LC_questions = '';
 		LC_questions +='<h4 align="center" class="QueHead">Level Controller Questions</h4>'
+//			+'<div id="Reqtimer" class="col-md-12 col-sm-12"><i><label id="minutes">00</label><span>:</span><label id="seconds">00</label></i></div>'
 			+'<div id = "questionDiv">'
 				
 				
@@ -58,6 +59,9 @@ showLC_Questions = function(appId){
 			$("#TestDiv").html(LC_questions);
 		
 		
+			stop_timer();
+			set_timer();
+			
 	
 	$('#testSubmit').on(
 				'click', function() {
@@ -84,7 +88,9 @@ showLC_Questions = function(appId){
 										
 										if (myRadio == null) {
 											flag = flag && false;
-											alertify.alert('Please attempt all the questions');
+											alertify.alert('Alert','Please attempt all the questions');
+											$(".ajs-header").css("background-color","#ce6058");
+
 											break;
 										}
 										arr.push({
@@ -109,17 +115,28 @@ showLC_Questions = function(appId){
 						}
 						
 						
+						minutes = document.getElementById("minutes").textContent;
+		        		seconds = document.getElementById("seconds").textContent;        		
+//		        		console.log(minutes+":"+seconds);
+		        		
+		        		
 						
 						
 						LC_testData.appId = appId;
 						LC_testData.rightQuesCnt = ansCount;
+						LC_testData.TesttimeinMin = minutes;
+						LC_testData.TesttimeinSec = seconds;						
 					//	console.log(LC_testData);
 						LC_appData.lcTestData = LC_testData
 					//	console.log(LC_appData);
 						ExpTrackData.lcAppData = LC_appData
-					//	console.log(ExpTrackData);
+		//				console.log(ExpTrackData);
 						
-						alertify.alert("Test Submitted Successfully <br/> Correct Answers Are  :"+ansCount);
+						stop_timer();
+						
+//						alertify.alert("Test Submitted Successfully <br/> Correct Answers Are  :"+ansCount);
+						alertify.alert("Success!!","Test Submitted Successfully <br/>Correct Answers Are : "+ansCount);
+						$(".ajs-header").css("background-color","#4CAF50");
 						$("#LCnextLevel").prop("hidden", false);
 						}
 							
@@ -127,6 +144,7 @@ showLC_Questions = function(appId){
 	
 	$('#LCnextLevel').on(
 				'click', function() {
+					window.scrollTo(0,0);
 					if(myRadio != null){
 						
 					//	connectionLevel(appId);
@@ -157,7 +175,9 @@ showLC_Questions = function(appId){
 						
 					}else{
 						
-						alertify.alert("Please Submit The Test");
+						alertify.alert("Alert","Please Submit The Test");
+						$(".ajs-header").css("background-color","#ce6058");
+
 					}
 					
 					
